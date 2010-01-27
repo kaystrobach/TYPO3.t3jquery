@@ -61,6 +61,8 @@
 			<label index="jquery.component.selectable">Makes a list of elements mouse selectable by dragging a box or clicking on them.</label>
 			<label index="jquery.component.sortable">Makes a list of items sortable.</label>
 			<label index="jquery.component.accordion">Creates an accordion navigation widget.</label>
+			<label index="jquery.component.autocomplete">Creates an element for autocomplete.</label>
+			<label index="jquery.component.button">Creates themable buttons.</label>
 			<label index="jquery.component.dialog">Opens existing markup in a draggable and resizable dialog.</label>
 			<label index="jquery.component.slider">A flexible slider with ranges and accessibility via keyboard.</label>
 			<label index="jquery.component.tabs">Transforms a set of container elements into a tab structure.</label>

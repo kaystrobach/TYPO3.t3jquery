@@ -8,16 +8,14 @@
 				<numIndex index="1" type="array">
 					<name>jQuery</name>
 					<label>jQuery</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.jquery
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.jquery</detail>
 					<file>jquery.js</file>
 					<depends>jQuery</depends>
 				</numIndex>
 				<numIndex index="2" type="array">
 					<name>Core</name>
 					<label>UI Core</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.uicore
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.uicore</detail>
 					<file>ui/ui.core.js</file>
 					<depends>jQuery</depends>
 				</numIndex>
@@ -30,8 +28,7 @@
 				<numIndex index="1" type="array">
 					<name>Draggable</name>
 					<label>Draggable</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.draggable
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.draggable</detail>
 					<file>ui/ui.draggable.js</file>
 					<depends>Core</depends>
 					<sources type="array">
@@ -41,8 +38,7 @@
 				<numIndex index="2" type="array">
 					<name>Droppable</name>
 					<label>Droppable</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.droppable
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.droppable</detail>
 					<file>ui/ui.droppable.js</file>
 					<depends>Core,Draggable</depends>
 					<sources type="array">
@@ -52,8 +48,7 @@
 				<numIndex index="3" type="array">
 					<name>Resizable</name>
 					<label>Resizable</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.resizable
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.resizable</detail>
 					<file>ui/ui.resizable.js</file>
 					<depends>Core</depends>
 					<sources type="array">
@@ -63,8 +58,7 @@
 				<numIndex index="4" type="array">
 					<name>Selectable</name>
 					<label>Selectable</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.selectable
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.selectable</detail>
 					<file>ui/ui.selectable.js</file>
 					<depends>Core</depends>
 					<sources type="array">
@@ -74,8 +68,7 @@
 				<numIndex index="5" type="array">
 					<name>Sortable</name>
 					<label>Sortable</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.sortable
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.sortable</detail>
 					<file>ui/ui.sortable.js</file>
 					<depends>Core</depends>
 					<sources type="array">
@@ -91,8 +84,7 @@
 				<numIndex index="1" type="array">
 					<name>Accordion</name>
 					<label>Accordion</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.accordion
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.accordion</detail>
 					<file>ui/ui.accordion.js</file>
 					<depends>Core</depends>
 					<sources type="array">
@@ -102,8 +94,7 @@
 				<numIndex index="2" type="array">
 					<name>Dialog</name>
 					<label>Dialog</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.dialog
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.dialog</detail>
 					<file>ui/ui.dialog.js</file>
 					<depends>Core,Draggable,Droppable</depends>
 					<sources type="array">
@@ -113,8 +104,7 @@
 				<numIndex index="3" type="array">
 					<name>Slider</name>
 					<label>Slider</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.slider
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.slider</detail>
 					<file>ui/ui.slider.js</file>
 					<depends>Core</depends>
 					<sources type="array">
@@ -124,8 +114,7 @@
 				<numIndex index="4" type="array">
 					<name>Tabs</name>
 					<label>Tabs</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.tabs
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.tabs</detail>
 					<file>ui/ui.tabs.js</file>
 					<depends>Core</depends>
 					<sources type="array">
@@ -135,8 +124,7 @@
 				<numIndex index="5" type="array">
 					<name>Datepicker</name>
 					<label>Datepicker</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.datepicker
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.datepicker</detail>
 					<file>ui/ui.datepicker.js</file>
 					<depends>Core</depends>
 					<sources type="array">
@@ -344,8 +332,7 @@
 				<numIndex index="1" type="array">
 					<name>EffectsCore</name>
 					<label>Effects Core</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.core
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.core</detail>
 					<file>ui/effects.core.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -355,8 +342,7 @@
 				<numIndex index="2" type="array">
 					<name>EffectsBlind</name>
 					<label>Effects Blind</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.blind
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.blind</detail>
 					<file>ui/effects.blind.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -368,8 +354,7 @@
 				<numIndex index="3" type="array">
 					<name>EffectsBounce</name>
 					<label>Effects Bounce</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.bounce
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.bounce</detail>
 					<file>ui/effects.bounce.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -381,8 +366,7 @@
 				<numIndex index="4" type="array">
 					<name>EffectsClip</name>
 					<label>Effects Clip</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.clip
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.clip</detail>
 					<file>ui/effects.clip.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -394,8 +378,7 @@
 				<numIndex index="5" type="array">
 					<name>EffectsDrop</name>
 					<label>Effects Drop</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.drop
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.drop</detail>
 					<file>ui/effects.drop.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -407,8 +390,7 @@
 				<numIndex index="6" type="array">
 					<name>EffectsExplode</name>
 					<label>Effects Explode</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.explode
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.explode</detail>
 					<file>ui/effects.explode.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -420,8 +402,7 @@
 				<numIndex index="7" type="array">
 					<name>EffectsFold</name>
 					<label>Effects Fold</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.fold
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.fold</detail>
 					<file>ui/effects.fold.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -433,8 +414,7 @@
 				<numIndex index="8" type="array">
 					<name>EffectsHighlight</name>
 					<label>Effects Highlight</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.highlight
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.highlight</detail>
 					<file>ui/effects.highlight.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -446,8 +426,7 @@
 				<numIndex index="9" type="array">
 					<name>EffectsPulsate</name>
 					<label>Effects Pulsate</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.pulsate
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.pulsate</detail>
 					<file>ui/effects.pulsate.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -459,8 +438,7 @@
 				<numIndex index="10" type="array">
 					<name>EffectsScale</name>
 					<label>Effects Scale</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.scale
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.scale</detail>
 					<file>ui/effects.scale.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -472,8 +450,7 @@
 				<numIndex index="11" type="array">
 					<name>EffectsShake</name>
 					<label>Effects Shake</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.shake
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.shake</detail>
 					<file>ui/effects.shake.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -485,8 +462,7 @@
 				<numIndex index="12" type="array">
 					<name>EffectsSlide</name>
 					<label>Effects Slide</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.slide
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.slide</detail>
 					<file>ui/effects.slide.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -498,8 +474,7 @@
 				<numIndex index="13" type="array">
 					<name>EffectsTransfer</name>
 					<label>Effects Transfer</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.transfer
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.transfer</detail>
 					<file>ui/effects.transfer.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
@@ -511,8 +486,7 @@
 				<numIndex index="14" type="array">
 					<name>Easing</name>
 					<label>Easing</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.easing
-					</detail>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.easing</detail>
 					<file>jquery-easing.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
