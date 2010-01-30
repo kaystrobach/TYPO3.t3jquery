@@ -84,6 +84,26 @@
 			<label index="jquery.component.effects.slide">The element slides in and out of the viewport.</label>
 			<label index="jquery.component.effects.transfer">Transfer effect from one element to another.</label>
 			<label index="jquery.component.easing">A jQuery plugin to give advanced easing options.</label>
+			<label index="tools.component.tabs">The most important UI widget on the web</label>
+			<label index="tools.component.tabsslideshow">Transforms tabs into a working slideshow</label>
+			<label index="tools.component.tabshistory">The ability to navigate through tabs with the browser's back and forward buttons</label>
+			<label index="tools.component.tooltip">The second most important UI widget on the web.</label>
+			<label index="tools.component.tooltipslide">A sliding tooltip effect with customized sliding directions, dimensions and speeds</label>
+			<label index="tools.component.tooltipdynamic">Dynamic positioning of the tooltip so that it always stays in the viewport</label>
+			<label index="tools.component.scrollable">A generic HTML scrolling widget</label>
+			<label index="tools.component.scrollablecircular">Makes an infinite loop from the scrollable items so that there is no beginning or end</label>
+			<label index="tools.component.scrollableautoscroll">Makes the scrolling behaviour automatic. highly configurable</label>
+			<label index="tools.component.scrollablenavigator">Provides navigation buttons for switching between pages in scrollable</label>
+			<label index="tools.component.scrollablemousewheel">Enables mousewheel support for scrollable</label>
+			<label index="tools.component.overlay">A generic HTML overlaying widget</label>
+			<label index="tools.component.overlaygallery">A plugin for creating "lightbox" style image galleries</label>
+			<label index="tools.component.overlayapple">An overlay effect that you have seen on apple.com</label>
+			<label index="tools.component.expose">Makes your HTML stand out from its surroundings</label>
+			<label index="tools.component.flashembed">The future of Flash embedding. Works as a standalone tool and jQuery is not required. flowplayer.js contains this script.</label>
+			<label index="tools.component.flowplayer">The JavaScript component of Flowplayer - the Video player for the Web</label>
+			<label index="tools.component.flowplayercontrolbar">Generate video controls with HTML and CSS</label>
+			<label index="tools.component.flowplayerplaylist">Generate video playlists with HTML and CSS</label>
+			<label index="tools.component.flowplayerembedding">Generates embedding codes for Flowplayer</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">jQuery Setup</label>
