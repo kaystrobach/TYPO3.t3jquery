@@ -67,7 +67,7 @@
 			<label index="jquery.component.dialog">Opens existing markup in a draggable and resizable dialog.</label>
 			<label index="jquery.component.slider">A flexible slider with ranges and accessibility via keyboard.</label>
 			<label index="jquery.component.tabs">Transforms a set of container elements into a tab structure.</label>
-			<label index="jquery.component.datepicker">A datepicker than can be toggled from a input or displayed inline.</label>
+			<label index="jquery.component.datepicker">A datepicker that can be toggled from an input or displayed inline.</label>
 			<label index="jquery.component.progressbar">A status indicator that can be used for a loading state and standard percentage indicators.</label>
 			<label index="jquery.component.effects.core">Extends the internal jQuery effects, includes morphing, easing and is required by all other effects.</label>
 			<label index="jquery.component.effects.blind">Blinds the element.</label>

@@ -117,6 +117,7 @@
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.tabs</detail>
 					<file>ui/ui.tabs.js</file>
 					<depends>Core</depends>
+					<disturbing>ToolsTabs</disturbing>
 					<sources type="array">
 						<numIndex index="1">.tabs(</numIndex>
 					</sources>
