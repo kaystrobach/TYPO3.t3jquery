@@ -13,6 +13,13 @@
 					<depends>jQuery</depends>
 				</numIndex>
 				<numIndex index="2" type="array">
+					<name>noConflict</name>
+					<label>noConflict</label>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.noConflict</detail>
+					<file>jquery-noConflict.js</file>
+					<depends>jQuery</depends>
+				</numIndex>
+				<numIndex index="3" type="array">
 					<name>Core</name>
 					<label>UI Core</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.uicore</detail>

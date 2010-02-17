@@ -52,6 +52,7 @@
 			<label index="jquery.packito.note">&lt;em&gt;Note: Only files with the extension &lt;strong&gt;.js&lt;/strong&gt; is accepted.&lt;br /&gt; Local extension dirs can be accessed using EXT:. ie. EXT:t3jquery/res/jqconfig.js&lt;/em&gt;</label>
 			<label index="jquery.packito.remote">Remote file:</label>
 			<label index="jquery.component.jquery">The jQuery, required for UI Core.</label>
+			<label index="jquery.component.noConflict">Activates the noConflict mode of jQuery to work with other JS-Frameworks</label>
 			<label index="jquery.component.uicore">The core of jQuery UI, required for all interactions and widgets.</label>
 			<label index="jquery.component.widget">Core utility for building UI controls.</label>
 			<label index="jquery.component.mouse">Track and handle mouse-based interactions.</label>
