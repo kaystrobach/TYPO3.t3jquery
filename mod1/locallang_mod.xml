@@ -6,7 +6,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="mlang_labels_tabdescr">T3 jQuery</label>
+			<label index="mlang_labels_tabdescr">Provides a shared version of the jQuery Javascript framework for use in other extensions. See class.tx_t3jquery.php for API and usage. Includes BE module for configuring which parts of jQuery UI you want included.</label>
 			<label index="mlang_labels_tablabel">T3 jQuery</label>
 			<label index="mlang_tabs_tab">T3 jQuery</label>
 		</languageKey>
