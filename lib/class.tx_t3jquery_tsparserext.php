@@ -74,15 +74,17 @@ class tx_t3jquery_tsparserext
 	</div>
 </div>';
 		}
-		// Check if the library is existing
+		// Check if the library exists
 		if (! file_exists(PATH_site . $configDir . "jquery-".$jQueryVersion.".js")) {
 			$out .= '
-<div class="typo3-message message-warning">
-	<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.updatermsgHeader2') . '</div>
-	<div class="message-body">
-		 ' . sprintf($GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.updatermsg2'), $configDir."jquery-".$jQueryVersion.".js") . '
+<a href="javascript:void();" onclick="top.goToModule(\'tools_txt3jqueryM1\',\'\',\'createLib=1\');this.blur();return false;">
+	<div class="typo3-message message-warning">
+		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.updatermsgHeader2') . '</div>
+		<div class="message-body">
+			' . sprintf($GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.updatermsg2'), $configDir."jquery-".$jQueryVersion.".js") . '
+		</div>
 	</div>
-</div>';
+</a>';
 		}
 		if ($out && t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
 			// 4.3.0 comes with flashmessages styles. For older versions we include the needed styles here
