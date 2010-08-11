@@ -77,7 +77,7 @@
 			<label index="jquery.component.effects.clip">Clips the element on and off like an old TV.</label>
 			<label index="jquery.component.effects.drop">A Drop out effect by moving the element in one direction and hiding it at the same time.</label>
 			<label index="jquery.component.effects.explode">The element explodes in all directions into n pieces. Also supports imploding again.</label>
-			<label index="jquery.component.effects.fade">The element will fades the element in or out.</label>
+			<label index="jquery.component.effects.fade">The element will fades in or out.</label>
 			<label index="jquery.component.effects.fold">Folds the element first horizontally and then vertically.</label>
 			<label index="jquery.component.effects.highlight">Highlights the background of the element in a defined color for a custom duration.</label>
 			<label index="jquery.component.effects.pulsate">The element pulsates n times by changing the opacity to zero and back.</label>
@@ -100,8 +100,13 @@
 			<label index="tools.component.overlay">A generic HTML overlaying widget</label>
 			<label index="tools.component.overlaygallery">A plugin for creating &quot;lightbox&quot; style image galleries</label>
 			<label index="tools.component.overlayapple">An overlay effect that you have seen on apple.com</label>
-			<label index="tools.component.expose">Makes your HTML stand out from its surroundings</label>
+			<label index="tools.component.formdateinput">HTML5 date input for humans</label>
+			<label index="tools.component.formrangeinput">HTML5 range input for humans</label>
+			<label index="tools.component.formvalidator">HTML5 input validation for humans</label>
 			<label index="tools.component.flashembed">The future of Flash embedding. Works as a standalone tool and jQuery is not required. flowplayer.js contains this script.</label>
+			<label index="tools.component.history">Back button for AJAX apps</label>
+			<label index="tools.component.expose">Makes your HTML stand out from its surroundings</label>
+			<label index="tools.component.mousewheel">A generic mousewheel support for jQuery</label>
 			<label index="tools.component.flowplayer">The JavaScript component of Flowplayer - the Video player for the Web</label>
 			<label index="tools.component.flowplayercontrolbar">Generate video controls with HTML and CSS</label>
 			<label index="tools.component.flowplayerplaylist">Generate video playlists with HTML and CSS</label>
