@@ -503,5 +503,18 @@
 				</numIndex>
 			</files>
 		</numIndex>
+		<numIndex index="5" type="array">
+			<name>Debug</name>
+			<label>Debug</label>
+			<files type="array">
+				<numIndex index="1" type="array">
+					<name>Lint</name>
+					<label>Lint</label>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.lint</detail>
+					<file>jquery.lint.js</file>
+					<depends>jQuery</depends>
+				</numIndex>
+			</files>
+		</numIndex>
 	</groups>
 </t3jquery>
