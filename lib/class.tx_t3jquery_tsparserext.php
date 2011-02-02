@@ -124,6 +124,7 @@ class tx_t3jquery_tsparserext
 	{
 		$confDefault = array(
 			'alwaysIntegrate',
+			'integrateToFooter',
 			'dontIntegrateOnUID',
 			'integrateFromCDN',
 			'locationCDN',
