@@ -529,14 +529,28 @@
 			</files>
 		</numIndex>
 		<numIndex index="5" type="array">
-			<name>Debug</name>
-			<label>Debug</label>
+			<name>Plugins</name>
+			<label>Plugins</label>
 			<files type="array">
 				<numIndex index="1" type="array">
+					<name>MouseWheel</name>
+					<label>Mouse Wheel</label>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.mousewheel</detail>
+					<file>jquery.mousewheel.js</file>
+					<depends>jQuery</depends>
+				</numIndex>
+				<numIndex index="2" type="array">
 					<name>Lint</name>
 					<label>Lint</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.lint</detail>
 					<file>jquery.lint.js</file>
+					<depends>jQuery</depends>
+				</numIndex>
+				<numIndex index="3" type="array">
+					<name>Mobile</name>
+					<label>Mobile</label>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.mobile</detail>
+					<file>jquery.mobile.js</file>
 					<depends>jQuery</depends>
 				</numIndex>
 			</files>
