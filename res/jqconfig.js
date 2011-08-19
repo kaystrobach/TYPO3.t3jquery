@@ -1,6 +1,6 @@
 var Site = {
 
-	startJqForm: function(){
+	startJqForm: function() {
 		if (jQuery('#download')) Site.download();
 		if (jQuery("#process")) Site.process();
 	},
@@ -18,7 +18,7 @@ var Site = {
 		});
 	},
 
-	download: function(){
+	download: function() {
 		jQuery('input[deps]').each(function(id, input) {
 			jQuery(input).click(function(event) {
 				Site.toggleDeps(this);
@@ -66,7 +66,7 @@ var Site = {
 
 	checkDependants: function(deps) {
 		jQuery(deps).each(function(id, input) {
-			if (jQuery("#"+input).length && jQuery("#"+input).attr('checked') == false) {
+			if (jQuery("#"+input).length && jQuery("#"+input).is(':checked') == false) {
 				Site.check(jQuery("#"+input));
 			}
 		});

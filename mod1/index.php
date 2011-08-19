@@ -84,7 +84,7 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 	var $pageinfo;
 	var $extKey = 't3jquery';
 	var $jQueryVersion      = '1.6.2';
-	var $jQueryUiVersion    = '1.8.14';
+	var $jQueryUiVersion    = '1.8.16';
 	var $jQueryTOOLSVersion = '1.2.5';
 	var $LANG = NULL;
 	var $confArray = array();
