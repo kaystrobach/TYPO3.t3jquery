@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <t3jquery>
+	<version type="array">
+		<act>1.2.6-dev</act>
+		<cdn>1.2.5</cdn>
+	</version>
 	<groups type="array">
 		<numIndex index="1" type="array">
 			<name>jQuery TOOLS Tabs</name>
