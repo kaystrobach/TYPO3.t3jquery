@@ -241,10 +241,13 @@ class tx_t3jquery
 	* Returns the configuration of jQuery UI
 	* @return array
 	*/
-	function getJqueryConfiguration()
+	function getJqueryConfiguration($version=NULL)
 	{
-		$confArr = tx_t3jquery::getConf();
-		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/core/'.$confArr['jQueryVersion'].'/jquery.xml')));
+		if ($version === NULL) {
+			$confArr = tx_t3jquery::getConf();
+			$version = $confArr['jQueryVersion'];
+		}
+		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/core/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 
@@ -252,10 +255,13 @@ class tx_t3jquery
 	 * Returns the configuration of jQuery UI
 	 * @return array
 	 */
-	function getJqueryUiConfiguration()
+	function getJqueryUiConfiguration($version=NULL)
 	{
-		$confArr = tx_t3jquery::getConf();
-		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/ui/'.$confArr['jQueryUiVersion'].'/jquery.xml')));
+		if ($version === NULL) {
+			$confArr = tx_t3jquery::getConf();
+			$version = $confArr['jQueryUiVersion'];
+		}
+		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/ui/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 
@@ -263,10 +269,13 @@ class tx_t3jquery
 	 * Returns the configuration of jQuery UI
 	 * @return array
 	 */
-	function getJqueryToolsConfiguration()
+	function getJqueryToolsConfiguration($version=NULL)
 	{
-		$confArr = tx_t3jquery::getConf();
-		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/tools/'.$confArr['jQueryTOOLSVersion'].'/jquery.xml')));
+		if ($version === NULL) {
+			$confArr = tx_t3jquery::getConf();
+			$version = $confArr['jQueryTOOLSVersion'];
+		}
+		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/tools/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 

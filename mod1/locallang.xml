@@ -39,6 +39,10 @@
 			<label index="jquery.compression.none.name">No Compression</label>
 			<label index="jquery.compression.packer.description">Uses &lt;a href=&quot;http://joliclic.free.fr/php/javascript-packer/en/&quot; target=&quot;_blank&quot;&gt;the php5 version&lt;/a&gt; of &lt;a href=&quot;http://dean.edwards.name/packer/&quot; target=&quot;_blank&quot;&gt;Dean Edwards Packer&lt;/a&gt;.</label>
 			<label index="jquery.compression.packer.name">Packer Compression</label>
+			<label index="jquery.extension.missingLibrary">jQuery Library missing:</label>
+			<label index="jquery.extension.missingLibrary.ui">Some of your extensions require jQuery-UI. You need to add this manually in the extension-manager.</label>
+			<label index="jquery.extension.missingLibrary.tools">Some of your extensions require jQuery-TOOLS. You need to add this manually in the extension-manager.</label>
+			<label index="jquery.extension.em">Click here</label>
 			<label index="jquery.extension.dependencies">jQuery dependencies found selected extensions:</label>
 			<label index="jquery.extension.description">Select the extensions you want processed and checked for jQuery dependencies.</label>
 			<label index="jquery.extension.extkey">Extension Key:</label>
