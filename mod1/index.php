@@ -863,7 +863,7 @@ jQuery(document).ready(function() {
 				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/plugins/jquery.noConflict.js";
 			} elseif ($scriptPart == 'jquery-easing.js') { // Easing is in effects.core.js, nothing to do
 				$temp_script = NULL;
-			} elseif (in_array($scriptPart, array('jquery.mousewheel.js', 'jquery.lint.js', 'jquery.mobile.js'))) { // add plugins
+			} elseif (in_array($scriptPart, array('jquery.mousewheel.js', 'jquery.lint.js', 'jquery.mobile.js', 'jquery.cookie.js'))) { // add plugins
 				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/plugins/".$scriptPart;
 			} elseif (preg_match("/^TOOLS\:(.*)/", $scriptPart, $reg)) { // add TOOLS
 				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/tools/{$this->confArray['jQueryTOOLSVersion']}/ui/{$reg[1]}";

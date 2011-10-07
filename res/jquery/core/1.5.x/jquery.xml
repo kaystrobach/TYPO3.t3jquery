@@ -44,6 +44,7 @@
 					<depends>jQuery</depends>
 					<sources type="array">
 						<numIndex index="1">.mousewheel(</numIndex>
+						<numIndex index="2">.bind("mousewheel"</numIndex>
 					</sources>
 				</numIndex>
 				<numIndex index="2" type="array">
@@ -59,6 +60,16 @@
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.mobile</detail>
 					<file>jquery.mobile.js</file>
 					<depends>jQuery</depends>
+				</numIndex>
+				<numIndex index="4" type="array">
+					<name>Cookie</name>
+					<label>Cookie</label>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.cookie</detail>
+					<file>jquery.cookie.js</file>
+					<depends>jQuery</depends>
+					<sources type="array">
+						<numIndex index="1">.cookie(</numIndex>
+					</sources>
 				</numIndex>
 			</files>
 		</numIndex>

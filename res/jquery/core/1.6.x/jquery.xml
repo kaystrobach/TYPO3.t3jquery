@@ -61,6 +61,16 @@
 					<file>jquery.mobile.js</file>
 					<depends>jQuery</depends>
 				</numIndex>
+				<numIndex index="4" type="array">
+					<name>Cookie</name>
+					<label>Cookie</label>
+					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.cookie</detail>
+					<file>jquery.cookie.js</file>
+					<depends>jQuery</depends>
+					<sources type="array">
+						<numIndex index="1">.cookie(</numIndex>
+					</sources>
+				</numIndex>
 			</files>
 		</numIndex>
 	</groups>
