@@ -26,7 +26,7 @@ jQueryVersion = 1.6.x
 # cat=basic/typo/20; type=options[,1.8.x,1.7.x,1.6.x]; label=jQuery UI Version: Select the jQuery UI Version
 jQueryUiVersion = 1.8.x
 
-# cat=basic/typo/30; type=options[,1.2.6-dev,1.2.x,1.1.x]; label=jQuery TOOLS Version: Select the jQuery TOOLS Version
+# cat=basic/typo/30; type=options[,1.2.x,1.1.x]; label=jQuery TOOLS Version: Select the jQuery TOOLS Version
 jQueryTOOLSVersion = 
 
 
