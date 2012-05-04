@@ -287,14 +287,14 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 			// Use button from the Analyzer has been pressed
 			if ($_POST['usejq'] && $_POST['dependencies']) {
 				$temp = array();
-				$temp['files'] = unserialize(urldecode($_POST['dependencies']));
+				$temp['files'] = $this->safe_unserialize(urldecode($_POST['dependencies']));
 				$this->saveJqConf($temp);
 				$this->MOD_SETTINGS['function'] = 1;
 			}
 			// Merge&Use button from the Analyzer has been pressed
 			if ($_POST['mergejq'] && $_POST['dependencies']) {
 				$temp = array();
-				$temp['files'] = $this->mergeJqConf(unserialize(urldecode($_POST['dependencies'])));
+				$temp['files'] = $this->mergeJqConf($this->safe_unserialize(urldecode($_POST['dependencies'])));
 				$this->saveJqConf($temp);
 				$this->MOD_SETTINGS['function'] = 1;
 			}
@@ -1289,6 +1289,30 @@ jQuery(document).ready(function() {
 			}
 		}
 		return $result;
+	}
+
+	/**
+	* mixed safe_unserialize(string $serialized)
+	* Safely unserialize, that is only unserialize string, numbers and arrays, not objects
+	*
+	* @license Public Domain
+	* @author dcz (at) phpbb-seo (dot) com
+	*/
+	function safe_unserialize($serialized) {
+		// unserialize will return false for object declared with small cap o
+		// as well as if there is any ws between O and :
+		if (is_string($serialized) && strpos($serialized, "\0") === false) {
+			if (strpos($serialized, 'O:') === false) {
+				// the easy case, nothing to worry about
+				// let unserialize do the job
+				return @unserialize($serialized);
+			} else if (!preg_match('/(^|;|{|})O:[0-9]+:"/', $serialized)) {
+				// in case we did have a string with O: in it,
+				// but it was not a true serialized object
+				return @unserialize($serialized);
+			}
+		}
+		return false;
 	}
 }
 

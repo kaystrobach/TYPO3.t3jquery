@@ -97,7 +97,7 @@ class tx_t3jquery
 	 */
 	function addJqJS()
 	{
-		if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000) {
 			$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess']['t3jquery'] = 'EXT:t3jquery/class.tx_t3jquery.php:&tx_t3jquery->addJqJsByHook';
 		} else {
 			$confArr = tx_t3jquery::getConf();
@@ -224,7 +224,7 @@ class tx_t3jquery
 						'forceOnTop' => TRUE,
 					);
 				} else {
-					if (t3lib_div::int_from_ver($confArr['jQueryVersion']) < 1003002) {
+					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger($confArr['jQueryVersion']) < 1003002) {
 						t3lib_div::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in MSN-CDN', 't3jquery', 1);
 						$confArr['jQueryVersion'] = '1.3.2';
 					}
@@ -240,7 +240,7 @@ class tx_t3jquery
 					);
 				}
 				if ($confArr['jQueryUiVersion'] != '') {
-					if (t3lib_div::int_from_ver($confArr['jQueryUiVersion']) < 1008005) {
+					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger($confArr['jQueryUiVersion']) < 1008005) {
 						t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in MSN-CDN', 't3jquery', 1);
 						$confArr['jQueryUiVersion'] = '1.8.5';
 					}
@@ -541,7 +541,7 @@ class tx_t3jquery
 	 */
 	function addJsFile($file, $conf=array())
 	{
-		if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000) {
 			$pagerender = $GLOBALS['TSFE']->getPageRenderer();
 			if ($conf['tofooter'] == 'footer') {
 				$pagerender->addJsFooterFile($file, $conf['type'], $conf['compress'], $conf['forceOnTop'], $conf['allWrap']);
@@ -570,7 +570,7 @@ class tx_t3jquery
 	{
 		if ($conf['jsinline']) {
 			$GLOBALS['TSFE']->inlineJS['t3jquery.jsdata.' . $name] = $block;
-		} elseif (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+		} elseif (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000) {
 			$pagerender = $GLOBALS['TSFE']->getPageRenderer();
 			if ($conf['tofooter'] == 'footer') {
 				$pagerender->addJsFooterInlineCode($name, $block, $conf['compress'], $conf['forceOnTop']);
