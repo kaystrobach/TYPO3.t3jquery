@@ -181,35 +181,43 @@ class tx_t3jquery
 				// in jQuery TOOLS jQuery is included
 				if ($confArr['jQueryTOOLSVersion'] != '') {
 					$params['jsLibs']['jQueryTOOLS'] = array(
-						'file'       => 'http://cdn.jquerytools.org/'.$confArr['jQueryTOOLSVersion'].'/jquery.tools.min.js',
-						'type'       => 'text/javascript',
-						'section'    => self::getSection(),
-						'forceOnTop' => TRUE,
+						'file'                     => 'http://cdn.jquerytools.org/'.$confArr['jQueryTOOLSVersion'].'/jquery.tools.min.js',
+						'type'                     => 'text/javascript',
+						'section'                  => self::getSection(),
+						'forceOnTop'               => TRUE,
+						'disableCompression'       => FALSE,
+						'excludeFromConcatenation' => TRUE
 					);
 				} else {
 					$params['jsLibs']['jQuery'] = array(
-						'file'       => 'https://ajax.googleapis.com/ajax/libs/jquery/'.$confArr['jQueryVersion'].'/jquery.min.js',
-						'type'       => 'text/javascript',
-						'section'    => self::getSection(),
-						'forceOnTop' => TRUE,
+						'file'                     => 'https://ajax.googleapis.com/ajax/libs/jquery/'.$confArr['jQueryVersion'].'/jquery.min.js',
+						'type'                     => 'text/javascript',
+						'section'                  => self::getSection(),
+						'forceOnTop'               => TRUE,
+						'disableCompression'       => FALSE,
+						'excludeFromConcatenation' => TRUE
 					);
 				}
 				if ($confArr['jQueryUiVersion'] != '') {
 					$jsFile = 'https://ajax.googleapis.com/ajax/libs/jqueryui/'.$confArr['jQueryUiVersion'].'/jquery-ui.min.js';
 					$params['jsFiles'][$jsFile] = array(
-						'file'       => $jsFile,
-						'type'       => 'text/javascript',
-						'section'    => self::getSection(),
-						'forceOnTop' => TRUE,
+						'file'                     => $jsFile,
+						'type'                     => 'text/javascript',
+						'section'                  => self::getSection(),
+						'forceOnTop'               => TRUE,
+						'disableCompression'       => FALSE,
+						'excludeFromConcatenation' => TRUE
 					);
 				}
 				if ($confArr['jQueryBootstrapVersion'] != '') {
 					$jsFile = 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$confArr['jQueryBootstrapVersion'].'/bootstrap.min.js';
 					$params['jsFiles'][$jsFile] = array(
-							'file'       => $jsFile,
-							'type'       => 'text/javascript',
-							'section'    => self::getSection(),
-							'forceOnTop' => TRUE,
+						'file'                     => $jsFile,
+						'type'                     => 'text/javascript',
+						'section'                  => self::getSection(),
+						'forceOnTop'               => TRUE,
+						'disableCompression'       => FALSE,
+						'excludeFromConcatenation' => TRUE
 					);
 				}
 				break;
@@ -218,10 +226,12 @@ class tx_t3jquery
 				// in jQuery TOOLS jQuery is included
 				if ($confArr['jQueryTOOLSVersion'] != '') {
 					$params['jsLibs']['jQueryTOOLS'] = array(
-						'file'       => 'http://cdn.jquerytools.org/'.$confArr['jQueryTOOLSVersion'].'/jquery.tools.min.js',
-						'type'       => 'text/javascript',
-						'section'    => self::getSection(),
-						'forceOnTop' => TRUE,
+						'file'                     => 'http://cdn.jquerytools.org/'.$confArr['jQueryTOOLSVersion'].'/jquery.tools.min.js',
+						'type'                     => 'text/javascript',
+						'section'                  => self::getSection(),
+						'forceOnTop'               => TRUE,
+						'disableCompression'       => FALSE,
+						'excludeFromConcatenation' => TRUE
 					);
 				} else {
 					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger($confArr['jQueryVersion']) < 1003002) {
@@ -233,10 +243,12 @@ class tx_t3jquery
 						$confArr['jQueryVersion'] = substr($confArr['jQueryVersion'], 0, -2);
 					}
 					$params['jsLibs']['jQuery'] = array(
-						'file'       => 'http://ajax.aspnetcdn.com/ajax/jquery/jquery-'.$confArr['jQueryVersion'].'.min.js',
-						'type'       => 'text/javascript',
-						'section'    => self::getSection(),
-						'forceOnTop' => TRUE,
+						'file'                     => 'http://ajax.aspnetcdn.com/ajax/jquery/jquery-'.$confArr['jQueryVersion'].'.min.js',
+						'type'                     => 'text/javascript',
+						'section'                  => self::getSection(),
+						'forceOnTop'               => TRUE,
+						'disableCompression'       => FALSE,
+						'excludeFromConcatenation' => TRUE
 					);
 				}
 				if ($confArr['jQueryUiVersion'] != '') {
@@ -246,19 +258,23 @@ class tx_t3jquery
 					}
 					$jsFile = 'http://ajax.aspnetcdn.com/ajax/jquery.ui/'.$confArr['jQueryUiVersion'].'/jquery-ui.min.js';
 					$params['jsFiles'][$jsFile] = array(
-						'file'       => $jsFile,
-						'type'       => 'text/javascript',
-						'section'    => self::getSection(),
-						'forceOnTop' => TRUE,
+						'file'                     => $jsFile,
+						'type'                     => 'text/javascript',
+						'section'                  => self::getSection(),
+						'forceOnTop'               => TRUE,
+						'disableCompression'       => FALSE,
+						'excludeFromConcatenation' => TRUE
 					);
 				}
 				if ($confArr['jQueryBootstrapVersion'] != '') {
 					$jsFile = 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$confArr['jQueryBootstrapVersion'].'/bootstrap.min.js';
 					$params['jsFiles'][$jsFile] = array(
-							'file'       => $jsFile,
-							'type'       => 'text/javascript',
-							'section'    => self::getSection(),
-							'forceOnTop' => TRUE,
+						'file'                     => $jsFile,
+						'type'                     => 'text/javascript',
+						'section'                  => self::getSection(),
+						'forceOnTop'               => TRUE,
+						'disableCompression'       => FALSE,
+						'excludeFromConcatenation' => TRUE
 					);
 				}
 				break;

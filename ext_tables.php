@@ -9,6 +9,7 @@ if (TYPO3_MODE == 'BE') {
 
 	if ($confArr['enableStyleStatic']) {
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/bootstrap',         'T3JQUERY Style: Bootstrap default');
+		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/mobile',            'T3JQUERY Style: Mobiles default');
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/blitzer',        'T3JQUERY Style: UI Blitzer');
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/cupertino',      'T3JQUERY Style: UI Cupertino');
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/dark-hive',      'T3JQUERY Style: UI Dark-Hive');

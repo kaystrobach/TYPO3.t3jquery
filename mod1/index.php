@@ -61,9 +61,9 @@ $BE_USER->modAccess($MCONF, 1);	// This checks permissions and exits if the user
 // DEFAULT initialization of a module [END]
 
 if (intval(PHP_VERSION) < 5) {
-	require_once('class.JavaScriptPacker.php');
+	require_once('class.JavaScriptPacker.php4');
 } else {
-	require_once('class.JavaScriptPacker_php5.php');
+	require_once('class.JavaScriptPacker.php');
 }
 require_once('class.analyzeJqJS.php');
 if (t3lib_extMgm::isLoaded('extdeveval')) {
@@ -835,7 +835,7 @@ jQuery(document).ready(function() {
 			case 0 : {
 				$t1 = microtime(TRUE);
 
-				$packer = new JavaScriptPacker($script, 'Normal', TRUE, FALSE);
+				$packer = new JavaScriptPacker($script, 'None', TRUE, FALSE);
 				$script = $packer->pack();
 
 				$t2 = microtime(TRUE);
@@ -920,7 +920,7 @@ jQuery(document).ready(function() {
 			case 'packer' : {
 				$t1 = microtime(TRUE);
 
-				$packer = new JavaScriptPacker($script, 'Normal', TRUE, FALSE);
+				$packer = new JavaScriptPacker($script, 'None', TRUE, FALSE);
 				$script = $packer->pack();
 
 				$t2 = microtime(TRUE);
