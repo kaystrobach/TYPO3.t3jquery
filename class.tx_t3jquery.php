@@ -210,6 +210,10 @@ class tx_t3jquery
 					);
 				}
 				if ($confArr['jQueryBootstrapVersion'] != '') {
+					if ($confArr['jQueryBootstrapVersion'] == '2.0.4') {
+						t3lib_div::devLog('jQuery Bootstrap \''.$confArr['jQueryBootstrapVersion'].'\' not available', 't3jquery', 1);
+						$confArr['jQueryBootstrapVersion'] = '2.0.3';
+					}
 					$jsFile = 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$confArr['jQueryBootstrapVersion'].'/bootstrap.min.js';
 					$params['jsFiles'][$jsFile] = array(
 						'file'                     => $jsFile,
@@ -243,11 +247,11 @@ class tx_t3jquery
 						'excludeFromConcatenation' => TRUE
 					);
 				}
-				if ($confArr['jQueryUiVersion'] == '1.8.20') {
-					t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in Google-CDN: Use jQuery-CDN', 't3jquery', 1);
-					$confArr['jQueryUiVersion'] = '1.8';
-				}
 				if ($confArr['jQueryUiVersion'] != '') {
+					if ($confArr['jQueryUiVersion'] == '1.8.20') {
+						t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in Google-CDN: Use jQuery-CDN', 't3jquery', 1);
+						$confArr['jQueryUiVersion'] = '1.8';
+					}
 					$jsFile = 'https://ajax.googleapis.com/ajax/libs/jqueryui/'.$confArr['jQueryUiVersion'].'/jquery-ui.min.js';
 					$params['jsFiles'][$jsFile] = array(
 						'file'                     => $jsFile,
@@ -259,6 +263,10 @@ class tx_t3jquery
 					);
 				}
 				if ($confArr['jQueryBootstrapVersion'] != '') {
+					if ($confArr['jQueryBootstrapVersion'] == '2.0.4') {
+						t3lib_div::devLog('jQuery Bootstrap \''.$confArr['jQueryBootstrapVersion'].'\' not available', 't3jquery', 1);
+						$confArr['jQueryBootstrapVersion'] = '2.0.3';
+					}
 					$jsFile = 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$confArr['jQueryBootstrapVersion'].'/bootstrap.min.js';
 					$params['jsFiles'][$jsFile] = array(
 						'file'                     => $jsFile,
@@ -305,9 +313,9 @@ class tx_t3jquery
 						t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in MSN-CDN', 't3jquery', 1);
 						$confArr['jQueryUiVersion'] = '1.8.5';
 					}
-					if ($confArr['jQueryUiVersion'] == '1.8.20') {
+					if ($confArr['jQueryUiVersion'] == '1.8.21') {
 						t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in MSN-CDN: Use jQuery-CDN', 't3jquery', 1);
-						$confArr['jQueryUiVersion'] = '1.8.19';
+						$confArr['jQueryUiVersion'] = '1.8.20';
 					}
 					$jsFile = 'http://ajax.aspnetcdn.com/ajax/jquery.ui/'.$confArr['jQueryUiVersion'].'/jquery-ui.min.js';
 					$params['jsFiles'][$jsFile] = array(
@@ -320,6 +328,10 @@ class tx_t3jquery
 					);
 				}
 				if ($confArr['jQueryBootstrapVersion'] != '') {
+					if ($confArr['jQueryBootstrapVersion'] == '2.0.4') {
+						t3lib_div::devLog('jQuery Bootstrap \''.$confArr['jQueryBootstrapVersion'].'\' not available', 't3jquery', 1);
+						$confArr['jQueryBootstrapVersion'] = '2.0.3';
+					}
 					$jsFile = 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$confArr['jQueryBootstrapVersion'].'/bootstrap.min.js';
 					$params['jsFiles'][$jsFile] = array(
 						'file'                     => $jsFile,
