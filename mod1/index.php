@@ -29,9 +29,9 @@
  */
 
 
-$LANG->includeLLFile('EXT:t3jquery/mod1/locallang.xml');
+$GLOBALS['LANG']->includeLLFile('EXT:t3jquery/mod1/locallang.xml');
 require_once(PATH_t3lib . 'class.t3lib_scbase.php');
-$BE_USER->modAccess($MCONF,1);
+$GLOBALS['BE_USER']->modAccess($MCONF,1);
 // DEFAULT initialization of a module [END]
 
 
