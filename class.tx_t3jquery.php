@@ -248,7 +248,7 @@ class tx_t3jquery
 					);
 				}
 				if ($confArr['jQueryUiVersion'] != '') {
-					if ($confArr['jQueryUiVersion'] == '1.8.20') {
+					if (in_array($confArr['jQueryUiVersion'], array('1.8.20', '1.8.22'))) {
 						t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in Google-CDN: Use jQuery-CDN', 't3jquery', 1);
 						$confArr['jQueryUiVersion'] = '1.8';
 					}
