@@ -27,6 +27,7 @@ if (TYPO3_MODE == 'BE') {
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/south-street',   'T3JQUERY Style: UI South-Street');
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/start',          'T3JQUERY Style: UI Start');
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/sunny',          'T3JQUERY Style: UI Sunny');
+		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/typo3',          'T3JQUERY Style: UI Typo3');
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/ui-darkness',    'T3JQUERY Style: UI UI-Darkness');
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/ui-lightness',   'T3JQUERY Style: UI UI-Lightness');
 		t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ui/vader',          'T3JQUERY Style: UI Vader');
@@ -34,7 +35,7 @@ if (TYPO3_MODE == 'BE') {
 
 	if (! $confArr['integrateFromCDN']) {
 		t3lib_extMgm::addModulePath('tools_txt3jqueryM1', t3lib_extMgm::extPath($_EXTKEY) . 'mod1/');
-		t3lib_extMgm::addModule('tools', 'txt3jqueryM1', '', t3lib_extMgm::extPath($_EXTKEY).'mod1/');
+		t3lib_extMgm::addModule('tools', 'txt3jqueryM1', '', t3lib_extMgm::extPath($_EXTKEY) . 'mod1/');
 	}
 }
 

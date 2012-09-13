@@ -26,6 +26,8 @@
  * = Examples =
  *
  * <code title="Simple">
+ *   {namespace t3jquery=Tx_T3jquery_ViewHelpers}
+ *   
  *   <t3jquery:AddJQueryAndScript jsfile="EXT:example/main.js"/>
  * </code>
  * <output>
@@ -39,7 +41,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html
  */
 
-class Tx_T3jquery_ViewHelpers_AddJQueryAndScript extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_T3jquery_ViewHelpers_AddJQueryAndScriptViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 	/**
 	 * @param string $jsfile
 	 * @param string $jsurl

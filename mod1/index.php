@@ -100,7 +100,7 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 			$version = $this->confArray['jQueryUiVersion'];
 			$array_name = 'groups';
 		} else {
-			$version = $this->jQueryVersionOrig;
+			$version = $this->jQueryUiVersionOrig;
 			$array_name = 'groups_missing';
 		}
 		$this->jQueryUiConfig = tx_t3jquery::getJqueryUiConfiguration($version);
@@ -876,7 +876,11 @@ jQuery(document).ready(function() {
 			} elseif ($scriptPart == 'jquery.noConflict.js') { // add noConflict mode
 				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/plugins/jquery.noConflict.js";
 			} elseif ($scriptPart == 'jquery-easing.js') { // Easing is in effects.core.js, nothing to do
-				$temp_script = NULL;
+				if ($this->confArray['jQueryUiVersion'] == '1.9.x') {
+					$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/plugins/jquery.easing.js";
+				} else {
+					$temp_script = NULL;
+				}
 			} elseif (in_array($scriptPart, array('jquery.mousewheel.js', 'jquery.lint.js', 'jquery.mobile.js', 'jquery.cookie.js'))) { // add plugins
 				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/plugins/".$scriptPart;
 			} elseif (preg_match("/^TOOLS\:(.*)/", $scriptPart, $reg)) { // add TOOLS

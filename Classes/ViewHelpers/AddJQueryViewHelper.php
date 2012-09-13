@@ -25,6 +25,8 @@
  * = Examples =
  *
  * <code title="Simple">
+ *   {namespace t3jquery=Tx_T3jquery_ViewHelpers}
+ *   
  *   <t3jquery:AddJQuery />
  * </code>
  * <output>
@@ -36,7 +38,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html
  */
 
-class Tx_T3jquery_ViewHelpers_AddJQuery extends Tx_Fluid_Core_ViewHelper_AbstractTagBasedViewHelper {
+class Tx_T3jquery_ViewHelpers_AddJQueryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractTagBasedViewHelper {
 	/**
 	* Adds T3Jquery as Lib
 	* @param string color 
