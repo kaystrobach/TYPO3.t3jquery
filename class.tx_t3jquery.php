@@ -309,6 +309,10 @@ class tx_t3jquery
 						t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in MSN-CDN', 't3jquery', 1);
 						$confArr['jQueryUiVersion'] = '1.8.5';
 					}
+					if (tx_t3jquery::getIntFromVersion($confArr['jQueryUiVersion']) == 1008024) {
+						t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in MSN-CDN', 't3jquery', 1);
+						$confArr['jQueryUiVersion'] = '1.8.23';
+					}
 					$jsFile = 'http://ajax.aspnetcdn.com/ajax/jquery.ui/'.$confArr['jQueryUiVersion'].'/jquery-ui.min.js';
 					$params['jsFiles'][$jsFile] = array(
 						'file'                     => $jsFile,
