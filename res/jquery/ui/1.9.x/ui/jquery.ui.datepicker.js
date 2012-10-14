@@ -1,19 +1,19 @@
 /*!
- * jQuery UI Datepicker 1.9.0-rc.1
+ * jQuery UI Datepicker 1.9.0
  * http://jqueryui.com
  *
  * Copyright 2012 jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
  *
- * http://docs.jquery.com/UI/Datepicker
+ * http://api.jqueryui.com/datepicker/
  *
  * Depends:
  *	jquery.ui.core.js
  */
 (function( $, undefined ) {
 
-$.extend($.ui, { datepicker: { version: "1.9.0-rc.1" } });
+$.extend($.ui, { datepicker: { version: "1.9.0" } });
 
 var PROP_NAME = 'datepicker';
 var dpuuid = new Date().getTime();
@@ -708,9 +708,6 @@ $.extend(Datepicker.prototype, {
 
 	/* Generate the date picker content. */
 	_updateDatepicker: function(inst) {
-		if ($.datepicker._curInst && inst != $.datepicker._curInst) {
-			return;
-		}
 		this.maxRows = 4; //Reset the max number of rows being displayed (see #7043)
 		var borders = $.datepicker._getBorders(inst.dpDiv);
 		instActive = inst; // for delegate hover events
@@ -1840,7 +1837,7 @@ $.fn.datepicker = function(options){
 $.datepicker = new Datepicker(); // singleton instance
 $.datepicker.initialized = false;
 $.datepicker.uuid = new Date().getTime();
-$.datepicker.version = "1.9.0-rc.1";
+$.datepicker.version = "1.9.0";
 
 // Workaround for #4055
 // Add another global to avoid noConflict issues with inline event handlers

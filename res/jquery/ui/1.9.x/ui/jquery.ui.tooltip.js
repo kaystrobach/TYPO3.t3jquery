@@ -1,10 +1,12 @@
 /*!
- * jQuery UI Tooltip 1.9.0-rc.1
+ * jQuery UI Tooltip 1.9.0
  * http://jqueryui.com
  *
  * Copyright 2012 jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/tooltip/
  *
  * Depends:
  *	jquery.ui.core.js
@@ -41,7 +43,7 @@ function removeDescribedBy( elem ) {
 }
 
 $.widget( "ui.tooltip", {
-	version: "1.9.0-rc.1",
+	version: "1.9.0",
 	options: {
 		content: function() {
 			return $( this ).attr( "title" );
@@ -73,13 +75,22 @@ $.widget( "ui.tooltip", {
 	},
 
 	_setOption: function( key, value ) {
+		var that = this;
+
 		if ( key === "disabled" ) {
 			this[ value ? "_disable" : "_enable" ]();
 			this.options[ key ] = value;
 			// disable element style changes
 			return;
 		}
+
 		this._super( key, value );
+
+		if ( key === "content" ) {
+			$.each( this.tooltips, function( id, element ) {
+				that._updateContent( element );
+			});
+		}
 	},
 
 	_disable: function() {
@@ -114,9 +125,7 @@ $.widget( "ui.tooltip", {
 	},
 
 	open: function( event ) {
-		var content,
-			that = this,
-			target = $( event ? event.target : this.element )
+		var target = $( event ? event.target : this.element )
 				.closest( this.options.items );
 
 		// No element to show a tooltip for
@@ -131,6 +140,8 @@ $.widget( "ui.tooltip", {
 			this._find( target ).position( $.extend({
 				of: target
 			}, this.options.position ) );
+			// Stop tracking (#8622)
+			this._off( this.document, "mousemove" );
 			return;
 		}
 
@@ -140,19 +151,31 @@ $.widget( "ui.tooltip", {
 
 		target.data( "tooltip-open", true );
 
-		content = this.options.content.call( target[0], function( response ) {
+		this._updateContent( target, event );
+	},
+
+	_updateContent: function( target, event ) {
+		var content,
+			contentOption = this.options.content,
+			that = this;
+
+		if ( typeof contentOption === "string" ) {
+			return this._open( event, target, contentOption );
+		}
+
+		content = contentOption.call( target[0], function( response ) {
 			// ignore async response if tooltip was closed already
 			if ( !target.data( "tooltip-open" ) ) {
 				return;
 			}
 			// IE may instantly serve a cached response for ajax requests
 			// delay this call to _open so the other call to _open runs first
-			setTimeout(function() {
-				that._open( event, target, response );
-			}, 1 );
+			that._delay(function() {
+				this._open( event, target, response );
+			});
 		});
 		if ( content ) {
-			that._open( event, target, content );
+			this._open( event, target, content );
 		}
 	},
 
@@ -193,7 +216,7 @@ $.widget( "ui.tooltip", {
 			positionOption.of = event;
 			tooltip.position( positionOption );
 		}
-		if ( this.options.track && /^mouse/.test( event.originalEvent.type ) ) {
+		if ( this.options.track && event && /^mouse/.test( event.originalEvent.type ) ) {
 			positionOption = $.extend( {}, this.options.position );
 			this._on( this.document, {
 				mousemove: position
@@ -294,8 +317,24 @@ $.widget( "ui.tooltip", {
 	},
 
 	_destroy: function() {
-		$.each( this.tooltips, function( id ) {
+		var that = this;
+
+		// close open tooltips
+		$.each( this.tooltips, function( id, element ) {
+			// Delegate to close method to handle common cleanup
+			var event = $.Event( "blur" );
+			event.target = event.currentTarget = element[0];
+			that.close( event, true );
+
+			// Remove immediately; destroying an open tooltip doesn't use the
+			// hide animation
 			$( "#" + id ).remove();
+
+			// Restore the title
+			if ( element.data( "ui-tooltip-title" ) ) {
+				element.attr( "title", element.data( "ui-tooltip-title" ) );
+				element.removeData( "ui-tooltip-title" );
+			}
 		});
 	}
 });

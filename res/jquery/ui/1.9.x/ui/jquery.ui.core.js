@@ -1,12 +1,12 @@
 /*!
- * jQuery UI Core 1.9.0-rc.1
+ * jQuery UI Core 1.9.0
  * http://jqueryui.com
  *
  * Copyright 2012 jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
  *
- * http://docs.jquery.com/UI
+ * http://api.jqueryui.com/category/ui-core/
  */
 (function( $, undefined ) {
 
@@ -22,7 +22,7 @@ if ( $.ui.version ) {
 }
 
 $.extend( $.ui, {
-	version: "1.9.0-rc.1",
+	version: "1.9.0",
 
 	keyCode: {
 		BACKSPACE: 8,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <t3jquery>
 	<version type="array">
-		<act>1.9.0-rc.1</act>
-		<cdn>1.9.0-rc.1</cdn>
+		<act>1.9.0</act>
+		<cdn>1.9.0</cdn>
 	</version>
 	<groups type="array">
 		<numIndex index="1" type="array">
@@ -171,7 +171,6 @@
 						<numIndex index="1">.progressbar(</numIndex>
 					</sources>
 				</numIndex>
-
 				<numIndex index="8" type="array">
 					<name>Menu</name>
 					<label>Menu</label>
@@ -202,7 +201,6 @@
 						<numIndex index="1">.tooltip(</numIndex>
 					</sources>
 				</numIndex>
-
 				<numIndex index="11" type="array">
 					<name>Datepicker</name>
 					<label>Datepicker</label>

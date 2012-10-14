@@ -1,12 +1,12 @@
 /*!
- * jQuery UI Sortable 1.9.0-rc.1
+ * jQuery UI Sortable 1.9.0
  * http://jqueryui.com
  *
  * Copyright 2012 jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
  *
- * http://docs.jquery.com/UI/Sortables
+ * http://api.jqueryui.com/sortable/
  *
  * Depends:
  *	jquery.ui.core.js
@@ -16,7 +16,7 @@
 (function( $, undefined ) {
 
 $.widget("ui.sortable", $.ui.mouse, {
-	version: "1.9.0-rc.1",
+	version: "1.9.0",
 	widgetEventPrefix: "sort",
 	ready: false,
 	options: {
