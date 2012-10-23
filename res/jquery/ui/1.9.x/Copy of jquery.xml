@@ -563,7 +563,7 @@
 					<name>EffectsCore</name>
 					<label>Effects Core</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.core</detail>
-					<file>ui/jquery.effects.core.js</file>
+					<file>ui/jquery.ui.effect.js</file>
 					<depends>Core</depends>
 					<sources type="array">
 						<numIndex index="1">.effect(</numIndex>
@@ -573,7 +573,7 @@
 					<name>EffectsBlind</name>
 					<label>Effects Blind</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.blind</detail>
-					<file>ui/jquery.effects.blind.js</file>
+					<file>ui/jquery.ui.effect-blind.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("blind"</numIndex>
@@ -585,7 +585,7 @@
 					<name>EffectsBounce</name>
 					<label>Effects Bounce</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.bounce</detail>
-					<file>ui/jquery.effects.bounce.js</file>
+					<file>ui/jquery.ui.effect-bounce.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("bounce"</numIndex>
@@ -597,7 +597,7 @@
 					<name>EffectsClip</name>
 					<label>Effects Clip</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.clip</detail>
-					<file>ui/jquery.effects.clip.js</file>
+					<file>ui/jquery.ui.effect-clip.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("clip"</numIndex>
@@ -609,7 +609,7 @@
 					<name>EffectsDrop</name>
 					<label>Effects Drop</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.drop</detail>
-					<file>ui/jquery.effects.drop.js</file>
+					<file>ui/jquery.ui.effect-drop.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("drop"</numIndex>
@@ -621,7 +621,7 @@
 					<name>EffectsExplode</name>
 					<label>Effects Explode</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.explode</detail>
-					<file>ui/jquery.effects.explode.js</file>
+					<file>ui/jquery.ui.effect-explode.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("explode"</numIndex>
@@ -633,7 +633,7 @@
 					<name>EffectsFade</name>
 					<label>Effects Fade</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.fade</detail>
-					<file>ui/jquery.effects.fade.js</file>
+					<file>ui/jquery.ui.effect-fade.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("fade"</numIndex>
@@ -645,7 +645,7 @@
 					<name>EffectsFold</name>
 					<label>Effects Fold</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.fold</detail>
-					<file>ui/jquery.effects.fold.js</file>
+					<file>ui/jquery.ui.effect-fold.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("fold"</numIndex>
@@ -657,7 +657,7 @@
 					<name>EffectsHighlight</name>
 					<label>Effects Highlight</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.highlight</detail>
-					<file>ui/jquery.effects.highlight.js</file>
+					<file>ui/jquery.ui.effect-highlight.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("highlight"</numIndex>
@@ -669,7 +669,7 @@
 					<name>EffectsPulsate</name>
 					<label>Effects Pulsate</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.pulsate</detail>
-					<file>ui/jquery.effects.pulsate.js</file>
+					<file>ui/jquery.ui.effect-pulsate.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("pulsate"</numIndex>
@@ -681,7 +681,7 @@
 					<name>EffectsScale</name>
 					<label>Effects Scale</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.scale</detail>
-					<file>ui/jquery.effects.scale.js</file>
+					<file>ui/jquery.ui.effect-scale.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("scale"</numIndex>
@@ -693,7 +693,7 @@
 					<name>EffectsShake</name>
 					<label>Effects Shake</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.shake</detail>
-					<file>ui/jquery.effects.shake.js</file>
+					<file>ui/jquery.ui.effect-shake.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("shake"</numIndex>
@@ -705,7 +705,7 @@
 					<name>EffectsSlide</name>
 					<label>Effects Slide</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.slide</detail>
-					<file>ui/jquery.effects.slide.js</file>
+					<file>ui/jquery.ui.effect-slide.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("slide"</numIndex>
@@ -717,7 +717,7 @@
 					<name>EffectsTransfer</name>
 					<label>Effects Transfer</label>
 					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.effects.transfer</detail>
-					<file>ui/jquery.effects.transfer.js</file>
+					<file>ui/jquery.ui.effect-transfer.js</file>
 					<depends>Core,EffectsCore</depends>
 					<sources type="array">
 						<numIndex index="1">.effect("transfer"</numIndex>
