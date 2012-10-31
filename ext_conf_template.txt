@@ -27,7 +27,7 @@ configDir = uploads/tx_t3jquery
 jQueryVersion = 1.8.x
 
 # cat=basic/typo/20; type=options[,1.9.x,1.8.x,1.7.x,1.6.x]; label=jQuery UI Version: Defines the jQuery UI Version
-jQueryUiVersion = 1.8.x
+jQueryUiVersion = 1.9.x
 
 # cat=basic/typo/30; type=options[,1.2.x,1.1.x]; label=jQuery TOOLS Version: Defines the jQuery TOOLS Version
 jQueryTOOLSVersion = 
