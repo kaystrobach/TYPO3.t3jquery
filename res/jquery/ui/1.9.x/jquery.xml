@@ -322,14 +322,14 @@
 							<file>ui/i18n/jquery.ui.datepicker-fo.js</file>
 						</numIndex>
 						<numIndex index="230" type="array">
-							<name>Datepicker-FR-CH</name>
-							<label>Swiss-French</label>
-							<file>ui/i18n/jquery.ui.datepicker-fr-CH.js</file>
-						</numIndex>
-						<numIndex index="240" type="array">
 							<name>Datepicker-FR</name>
 							<label>French</label>
 							<file>ui/i18n/jquery.ui.datepicker-fr.js</file>
+						</numIndex>
+						<numIndex index="240" type="array">
+							<name>Datepicker-FR-CH</name>
+							<label>Swiss-French</label>
+							<file>ui/i18n/jquery.ui.datepicker-fr-CH.js</file>
 						</numIndex>
 						<numIndex index="260" type="array">
 							<name>Datepicker-GL</name>
