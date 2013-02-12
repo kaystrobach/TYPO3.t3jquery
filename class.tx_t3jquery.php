@@ -238,6 +238,10 @@ class tx_t3jquery
 						'excludeFromConcatenation' => TRUE
 					);
 				} else {
+					if ($confArr['jQueryVersion'] == '2.0.0b1') {
+						t3lib_div::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in Google-CDN', 't3jquery', 1);
+						$confArr['jQueryVersion'] = '1.9.1';
+					}
 					$params['jsLibs']['jQuery'] = array(
 						'file'                     => 'https://ajax.googleapis.com/ajax/libs/jquery/'.$confArr['jQueryVersion'].'/jquery.min.js',
 						'type'                     => 'text/javascript',
@@ -287,6 +291,10 @@ class tx_t3jquery
 						'excludeFromConcatenation' => TRUE
 					);
 				} else {
+					if ($confArr['jQueryVersion'] == '2.0.0b1') {
+						t3lib_div::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in MSN-CDN', 't3jquery', 1);
+						$confArr['jQueryVersion'] = '1.9.1';
+					}
 					if (tx_t3jquery::getIntFromVersion($confArr['jQueryVersion']) < 1003002) {
 						t3lib_div::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in MSN-CDN', 't3jquery', 1);
 						$confArr['jQueryVersion'] = '1.3.2';
