@@ -788,20 +788,22 @@ jQuery(document).ready(function() {
 				foreach ($dirs as $dirName) {
 					// only display loaded extensions
 					if (t3lib_extMgm::isLoaded($dirName)) {
-						if (@file_exists($path.$dirName.'/t3jquery.txt')) {
-							// Get extension info from ext_emconf.php
-							$extInfo = $this->includeEMCONF($path.$dirName.'/ext_emconf.php', $dirName);
-							if (is_array($_POST['ext'])) {
-								$selVal = in_array($path.$dirName.'/t3jquery.txt',$_POST['ext']) ? ' checked="checked"' : '';
-							}
-							$c++;
-							$opt[] = '
+						foreach (array('/t3jquery.txt', '/Configuration/t3jquery.txt') as $file_location) {
+							if (@file_exists($path.$dirName.$file_location)) {
+								// Get extension info from ext_emconf.php
+								$extInfo = $this->includeEMCONF($path.$dirName.'/ext_emconf.php', $dirName);
+								if (is_array($_POST['ext'])) {
+									$selVal = in_array($path.$dirName.$file_location, $_POST['ext']) ? ' checked="checked"' : '';
+								}
+								$c++;
+								$opt[] = '
 	<tr class="bgColor4" valign="top">
-		<td><input name="ext[]" type="checkbox" id="ext'.$c.'" class="extkey" value="'.htmlspecialchars($path.$dirName.'/t3jquery.txt').'"'.$selVal.' /></td>
+		<td><input name="ext[]" type="checkbox" id="ext'.$c.'" class="extkey" value="'.htmlspecialchars($path.$dirName.$file_location).'"'.$selVal.' /></td>
 		<td title="'.htmlspecialchars($extInfo['description']).'" nowrap><label for="ext'.$c.'">'.htmlspecialchars($extInfo['title']).'</label></td>
 		<td nowrap>'.htmlspecialchars($dirName).'</td>
 		<td nowrap>'.htmlspecialchars($extInfo['version']).'</td>
 	</tr>';
+							}
 						}
 					}
 				}
