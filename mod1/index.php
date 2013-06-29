@@ -71,6 +71,7 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 	var $configDir = NULL;
 	var $configXML = array();
 	var $missingComponents = array();
+	var $errors = array();
 
 	/**
 	 * Initializes the Module
@@ -159,7 +160,9 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 		// create the config folder
 		if (! is_dir($this->configDir)) {
 			if (! t3lib_div::mkdir($this->configDir)) {
-				t3lib_div::devLog("Could not create config path '{$this->configDir}'!", 't3jquery', 3);
+				$error = "Could not create config path '{$this->configDir}'!";
+				$this->errors['createFolder'] = $error;
+				t3lib_div::devLog($error, 't3jquery', 3);
 				return FALSE;
 			}
 		}
@@ -174,7 +177,9 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 	function initConfig() {
 		if (! file_exists($this->configDir.'t3jquery.cfg')) {
 			if (! t3lib_div::writeFile($this->configDir.'t3jquery.cfg', '')) {
-				t3lib_div::devLog("Could not create config file '{$this->configDir}t3jquery.cfg'!", 't3jquery', 3);
+				$error = "Could not create config file '{$this->configDir}t3jquery.cfg'!";
+				$this->errors['initConfig'] = $error;
+				t3lib_div::devLog($error, 't3jquery', 3);
 				return FALSE;
 			}
 		}
@@ -274,6 +279,11 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 			$this->content .= $this->doc->startPage($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
 			$this->content .= $this->doc->header($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
 			$this->content .= $this->doc->spacer(5);
+
+			// Display the errors
+			foreach ($this->errors as $key => $error) {
+				$this->content .= $this->doc->section($error, "", FALSE, FALSE, 3, FALSE);
+			}
 
 			// Use button from the Analyzer has been pressed
 			if ($_POST['usejq'] && $_POST['dependencies']) {
@@ -883,7 +893,7 @@ jQuery(document).ready(function() {
 				} else {
 					$temp_script = NULL;
 				}
-			} elseif (in_array($scriptPart, array('jquery.mousewheel.js', 'jquery.lint.js', 'jquery.mobile.js', 'jquery.cookie.js'))) { // add plugins
+			} elseif (in_array($scriptPart, array('jquery.mousewheel.js', 'jquery.lint.js', 'jquery.mobile.js', 'jquery.cookie.js', 'jquery.migrate.js'))) { // add plugins
 				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/plugins/".$scriptPart;
 			} elseif (preg_match("/^TOOLS\:(.*)/", $scriptPart, $reg)) { // add TOOLS
 				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/tools/{$this->confArray['jQueryTOOLSVersion']}/ui/{$reg[1]}";
