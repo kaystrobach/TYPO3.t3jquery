@@ -103,35 +103,8 @@ class T3jqueryUtility
 	 */
 	function addJqJS()
 	{
-		if (T3jqueryUtility::getIntFromVersion(TYPO3_version) >= 4003000) {
-			$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.PageRenderer.php']['render-preProcess']['t3jquery'] = 'EXT:t3jquery/class.T3jqueryUtility.php:&T3jqueryUtility->addJqJsByHook';
-		} else {
-			$confArr = T3jqueryUtility::getConf();
-			// Override the headerdata, THX to S. Delcroix (RVVN -  sdelcroix@rvvn.org)
-			$block = NULL;
-			if ($confArr['integrateFromCDN'] && isset($confArr['locationCDN'])) {
-				$params = array();
-				T3jqueryUtility::getCdnScript($params);
-				if (isset($params['jsLibs'])) {
-					foreach ($params['jsLibs'] as $key => $param) {
-						$block .= '<script type="text/javascript" src="'.$param['file'].'"></script>';
-					}
-				}
-				if (isset($params['jsFiles'])) {
-					foreach ($params['jsFiles'] as $key => $param) {
-						$block .= '<script type="text/javascript" src="'.$param['file'].'"></script>';
-					}
-				}
-			} else {
-				$block .= T3jqueryUtility::getJqJS();
-			}
-			if ($confArr['integrateToFooter']) {
-				$GLOBALS['TSFE']->additionalFooterData['t3jquery.lib'] = $block;
-			} else {
-				$GLOBALS['TSFE']->additionalHeaderData['t3jquery.lib'] = $block;
-			}
-
-		}
+		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess']['t3jquery']
+			= '\\T3Ext\\T3jquery\\Utility\\T3jqueryUtility->addJqJsByHook';
 	}
 
 	/**
