@@ -41,7 +41,7 @@ $GLOBALS['BE_USER']->modAccess($MCONF,1);
  * @package    TYPO3
  * @subpackage tx_t3jquery
  */
-class  tx_t3jquery_module1 extends t3lib_SCbase
+class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 {
 	var $pageinfo;
 	var $extKey = 't3jquery';
@@ -146,10 +146,10 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 	{
 		// create the config folder
 		if (! is_dir($this->configDir)) {
-			if (! t3lib_div::mkdir($this->configDir)) {
+			if (! \TYPO3\CMS\Core\Utility\GeneralUtility::mkdir($this->configDir)) {
 				$error = "Could not create config path '{$this->configDir}'!";
 				$this->errors['createFolder'] = $error;
-				t3lib_div::devLog($error, 't3jquery', 3);
+				\TYPO3\CMS\Core\Utility\GeneralUtility::devLog($error, 't3jquery', 3);
 				return FALSE;
 			}
 		}
@@ -163,10 +163,10 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 	 */
 	function initConfig() {
 		if (! file_exists($this->configDir.'t3jquery.cfg')) {
-			if (! t3lib_div::writeFile($this->configDir.'t3jquery.cfg', '')) {
+			if (! \TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($this->configDir.'t3jquery.cfg', '')) {
 				$error = "Could not create config file '{$this->configDir}t3jquery.cfg'!";
 				$this->errors['initConfig'] = $error;
-				t3lib_div::devLog($error, 't3jquery', 3);
+				\TYPO3\CMS\Core\Utility\GeneralUtility::devLog($error, 't3jquery', 3);
 				return FALSE;
 			}
 		}
@@ -188,7 +188,7 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 				'4' => $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:function4'),
 			)
 		);
-		if (t3lib_extMgm::isLoaded('extdeveval')) {
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('extdeveval')) {
 			$this->MOD_MENU['function'][5] = $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:function5');
 		}
 		parent::menuConfig();
@@ -204,7 +204,7 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 	{
 		// Access check!
 		// The page will show only if there is a valid page and if this page may be viewed by the user
-		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id,$this->perms_clause);
+		$this->pageinfo = \TYPO3\CMS\Backend\Utility\BackendUtility::readPageAccess($this->id,$this->perms_clause);
 		$access = is_array($this->pageinfo) ? 1 : 0;
 
 		if ($_GET['createLib'] == 1) {
@@ -214,7 +214,7 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 		// If CDN is used, there are no settings.
 		if ($this->confArray['integrateFromCDN'] && isset($this->confArray['locationCDN'])) {
 			// Draw the header.
-			$this->doc = t3lib_div::makeInstance('bigDoc');
+			$this->doc = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Backend\Template\DocumentTemplate');
 			$this->doc->backPath = $GLOBALS['BACK_PATH'];
 
 			$this->content .= $this->doc->startPage($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
@@ -242,9 +242,9 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 
 		} else if (($this->id && $access) || ($GLOBALS['BE_USER']->user['admin'] && !$this->id)) {
 			// Draw the header.
-			$this->doc = t3lib_div::makeInstance('bigDoc');
+			$this->doc = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Backend\Template\DocumentTemplate');
 			$this->doc->backPath = $GLOBALS['BACK_PATH'];
-			$this->doc->form = '<form action="'.t3lib_div::linkThisScript().'#jqbuttons" method="post" enctype="multipart/form-data" name="jq" id="jq">';
+			$this->doc->form = '<form action="'.\TYPO3\CMS\Core\Utility\GeneralUtility::linkThisScript().'#jqbuttons" method="post" enctype="multipart/form-data" name="jq" id="jq">';
 
 			// JavaScript (jQuery subscripts is used, as no compressed lib exists yet or might not include the supparts needed.)
 			$this->doc->JScode = '
@@ -310,7 +310,7 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 				'',
 				$this->doc->funcMenu(
 					sprintf($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:version_in_use'), implode(" / ", $temp_version)),
-					t3lib_BEfunc::getFuncMenu($this->id, 'SET[function]', $this->MOD_SETTINGS['function'], $this->MOD_MENU['function'])
+					\TYPO3\CMS\Backend\Utility\BackendUtility::getFuncMenu($this->id, 'SET[function]', $this->MOD_SETTINGS['function'], $this->MOD_MENU['function'])
 				)
 			);
 			$this->content .= $this->doc->divider(5);
@@ -328,7 +328,7 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 		} else {
 			// If no access or if ID == zero
 
-			$this->doc = t3lib_div::makeInstance('mediumDoc');
+			$this->doc = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('mediumDoc');
 			$this->doc->backPath = $GLOBALS['BACK_PATH'];
 
 			$this->content .= $this->doc->startPage($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
@@ -369,7 +369,7 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 						$content = '
 <script type="text/javascript">
 jQuery(document).ready(function() {
-	alert("'.t3lib_div::slashJS($jsAlertData).'");
+	alert("'.\TYPO3\CMS\Core\Utility\GeneralUtility::slashJS($jsAlertData).'");
 });
 </script>';
 					}
@@ -381,7 +381,7 @@ jQuery(document).ready(function() {
 			case 2: {
 				$content = $this->makePackitoForm();
 				$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.header2'), $content, 0, 1);
-				$file = $_FILES['js_local']['tmp_name'] ? $_FILES['js_local']['tmp_name'] : ($_POST['js_remote'] ? t3lib_div::getFileAbsFileName($_POST['js_remote']) : '');
+				$file = $_FILES['js_local']['tmp_name'] ? $_FILES['js_local']['tmp_name'] : ($_POST['js_remote'] ? \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($_POST['js_remote']) : '');
 				// Form has been submitted
 				if ($file) {
 					$fileName = $_FILES['js_local']['name'] ? $_FILES['js_local']['name'] : ($_POST['js_remote'] ? $_POST['js_remote'] : $file );
@@ -410,7 +410,7 @@ jQuery(document).ready(function() {
 				if ($files) {
 					$dep = Array();
 					foreach ($files as $file) {
-						$dep = $this->processT3jqueryTxt(t3lib_div::getFileAbsFileName($file), $dep);
+						$dep = $this->processT3jqueryTxt(\TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($file), $dep);
 					}
 
 					// show the missing dependencies
@@ -435,8 +435,8 @@ jQuery(document).ready(function() {
 				if (t3lib_extMgm::isLoaded('extdeveval')) {
 					$content = NULL;
 					try {
-						$inst = t3lib_div::makeInstance('tx_extdeveval_apidisplay');
-						$content = '<hr />'.$inst->main(t3lib_div::getUrl('../ext_php_api.dat'),'tx_t3jquery');
+						$inst = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_extdeveval_apidisplay');
+						$content = '<hr />'.$inst->main(\TYPO3\CMS\Core\Utility\GeneralUtility::getUrl('../ext_php_api.dat'),'tx_t3jquery');
 					} catch (Exception $e) {
 						$content = $e->getMessage();
 					}
@@ -459,7 +459,7 @@ jQuery(document).ready(function() {
 		$fileName = $_FILES['js_local']['name'] ? $_FILES['js_local']['name'] : ($_POST['js_remote'] ? $_POST['js_remote'] : $file );
 		$path_info = pathinfo(array_shift(explode('?', basename($fileName))));
 		if ($path_info['extension'] == 'js') {
-			$fileData = t3lib_div::getURL($file);
+			$fileData = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($file);
 			if (substr($fileData, 0, 23) != 'eval(function(p,a,c,k,e') {
 				$pack = new analyzeJqJS('', $fileData, $this->configXML['groups']);
 				$requires = $pack->getDependencies();
@@ -777,7 +777,7 @@ jQuery(document).ready(function() {
 	{
 		$path = PATH_site.$localExtensionDir;
 		if (@is_dir($path))	{
-			$dirs = $this->extensionList = t3lib_div::get_dirs($path);
+			$dirs = $this->extensionList = \TYPO3\CMS\Core\Utility\GeneralUtility::get_dirs($path);
 			if (is_array($dirs)) {
 				sort($dirs);
 				$c = 0;
@@ -839,7 +839,7 @@ jQuery(document).ready(function() {
 
 				try {
 					$error = '';
-					$script = t3lib_div::minifyJavaScript($script, $error);
+					$script = \TYPO3\CMS\Core\Utility\GeneralUtility::minifyJavaScript($script, $error);
 					if ($error != '') {
 						throw new Exception($error);
 					}
@@ -888,10 +888,10 @@ jQuery(document).ready(function() {
 				$temp_script = t3lib_extMgm::extPath($this->extKey)."Resources/Public/Res/jquery/bootstrap/{$this->confArray['jQueryBootstrapVersion']}/ui/{$reg[1]}";
 				if ($compression == 'jsmin') {
 					if (file_exists($temp_script)) {
-						$script_bs .= t3lib_div::getURL($temp_script);
+						$script_bs .= \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($temp_script);
 					} else {
 						if ($temp_script) {
-							t3lib_div::devLog("File '{$temp_script}' not found!", 't3jquery', 3);
+							\TYPO3\CMS\Core\Utility\GeneralUtility::devLog("File '{$temp_script}' not found!", 't3jquery', 3);
 						}
 					}
 					$temp_script = NULL;
@@ -900,10 +900,10 @@ jQuery(document).ready(function() {
 				$temp_script = t3lib_extMgm::extPath($this->extKey)."Resources/Public/Res/jquery/ui/{$this->confArray['jQueryUiVersion']}/{$scriptPart}";
 			}
 			if (file_exists($temp_script)) {
-				$script .= t3lib_div::getURL($temp_script);
+				$script .= \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($temp_script);
 			} else {
 				if ($temp_script) {
-					t3lib_div::devLog("File '{$temp_script}' not found!", 't3jquery', 3);
+					\TYPO3\CMS\Core\Utility\GeneralUtility::devLog("File '{$temp_script}' not found!", 't3jquery', 3);
 				}
 			}
 		}
@@ -928,7 +928,7 @@ jQuery(document).ready(function() {
 				try {
 					$error = '';
 					$script_bs = $this->getNoDocs($script_bs, TRUE);
-					$script = t3lib_div::minifyJavaScript($script, $error).$script_bs;
+					$script = \TYPO3\CMS\Core\Utility\GeneralUtility::minifyJavaScript($script, $error).$script_bs;
 					if ($error != '') {
 						throw new Exception($error);
 					}
@@ -1048,7 +1048,7 @@ jQuery(document).ready(function() {
 	 */
 	function safeJqFile($block='')
 	{
-		t3lib_div::writeFile($this->configDir . tx_t3jquery::getJqName(), $block);
+		\TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($this->configDir . tx_t3jquery::getJqName(), $block);
 	}
 
 	/**
@@ -1058,7 +1058,7 @@ jQuery(document).ready(function() {
 	 */
 	function loadJqConf()
 	{
-		if ($formVars = t3lib_div::getURL($this->configDir.'t3jquery.cfg')) {
+		if ($formVars = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($this->configDir.'t3jquery.cfg')) {
 			$return = unserialize($formVars);
 			if (! is_array($return['files'])) {
 				// fallback for old config files
@@ -1087,7 +1087,7 @@ jQuery(document).ready(function() {
 	function saveJqConf($formVars)
 	{
 		if ($this->createFolder()) {
-			t3lib_div::writeFile($this->configDir.'t3jquery.cfg', serialize($formVars));
+			\TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($this->configDir.'t3jquery.cfg', serialize($formVars));
 		}
 	}
 
@@ -1316,7 +1316,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquer
 
 
 // Make instance:
-$SOBE = t3lib_div::makeInstance('tx_t3jquery_module1');
+$SOBE = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_t3jquery_module1');
 $SOBE->init();
 
 
