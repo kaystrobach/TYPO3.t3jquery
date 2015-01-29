@@ -70,20 +70,20 @@ class TsParserExt
 			$out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
 		}
 		// get all supported UI-Versions from folder
-		$supportedUiVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/res/jquery/ui/"));
+		$supportedUiVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/ui/"));
 		if (is_array($supportedUiVersions)) {
 			foreach ($supportedUiVersions as $supportedUiVersion) {
-				if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/res/jquery/ui/").$supportedUiVersion.'/jquery.xml')) {
+				if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/ui/").$supportedUiVersion.'/jquery.xml')) {
 					$this->supportedUiVersion[] = $supportedUiVersion;
 				}
 			}
 		}
 
 		// get all supported TOOLS-Versions from folder
-		$supportedToolsVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/res/jquery/tools/"));
+		$supportedToolsVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/tools/"));
 		if (is_array($supportedToolsVersions)) {
 			foreach ($supportedToolsVersions as $supportedToolsVersion) {
-				if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/res/jquery/tools/").$supportedToolsVersion.'/jquery.xml')) {
+				if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/tools/").$supportedToolsVersion.'/jquery.xml')) {
 					$this->supportedToolsVersion[] = $supportedToolsVersion;
 				}
 			}

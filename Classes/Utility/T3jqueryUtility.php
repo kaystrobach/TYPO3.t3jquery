@@ -383,7 +383,7 @@ class T3jqueryUtility
 			$confArr = T3jqueryUtility::getConf();
 			$version = $confArr['jQueryVersion'];
 		}
-		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/res/jquery/core/'.$version.'/jquery.xml')));
+		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/Resources/Public/Res/jquery/core/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 
@@ -397,7 +397,7 @@ class T3jqueryUtility
 			$confArr = T3jqueryUtility::getConf();
 			$version = $confArr['jQueryUiVersion'];
 		}
-		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/res/jquery/ui/'.$version.'/jquery.xml')));
+		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/Resources/Public/Res/jquery/ui/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 
@@ -411,7 +411,7 @@ class T3jqueryUtility
 			$confArr = T3jqueryUtility::getConf();
 			$version = $confArr['jQueryTOOLSVersion'];
 		}
-		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/res/jquery/tools/'.$version.'/jquery.xml')));
+		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/Resources/Public/Res/jquery/tools/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 
@@ -425,7 +425,7 @@ class T3jqueryUtility
 			$confArr = T3jqueryUtility::getConf();
 			$version = $confArr['jQueryBootstrapVersion'];
 		}
-		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/res/jquery/bootstrap/'.$version.'/jquery.xml')));
+		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/Resources/Public/Res/jquery/bootstrap/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 

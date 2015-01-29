@@ -248,8 +248,8 @@ class  tx_t3jquery_module1 extends t3lib_SCbase
 
 			// JavaScript (jQuery subscripts is used, as no compressed lib exists yet or might not include the supparts needed.)
 			$this->doc->JScode = '
-<script type="text/javascript" src="../'.t3lib_extMgm::siteRelPath('t3jquery').'res/jquery/core/' . $this->confArray['jQueryVersion'] . '/jquery.js"></script>
-<script type="text/javascript" src="../'.t3lib_extMgm::siteRelPath('t3jquery').'res/jqconfig.js"></script>
+<script type="text/javascript" src="../'.t3lib_extMgm::siteRelPath('t3jquery').'Resources/Public/Res/jquery/core/' . $this->confArray['jQueryVersion'] . '/jquery.js"></script>
+<script type="text/javascript" src="../'.t3lib_extMgm::siteRelPath('t3jquery').'Resources/Public/Res/jqconfig.js"></script>
 <script language="javascript" type="text/javascript">
 	script_ended = 0;
 	function jumpToUrl(URL)	{
@@ -871,21 +871,21 @@ jQuery(document).ready(function() {
 		foreach ($this->jQueryConfig['files'] as $scriptPart) {
 			$temp_script = NULL;
 			if ($scriptPart == 'jquery.js') { // add core
-				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/core/{$this->confArray['jQueryVersion']}/jquery.js";
+				$temp_script = t3lib_extMgm::extPath($this->extKey)."Resources/Public/Res/jquery/core/{$this->confArray['jQueryVersion']}/jquery.js";
 			} elseif ($scriptPart == 'jquery.noConflict.js') { // add noConflict mode
-				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/plugins/jquery.noConflict.js";
+				$temp_script = t3lib_extMgm::extPath($this->extKey)."Resources/Public/Res/jquery/plugins/jquery.noConflict.js";
 			} elseif ($scriptPart == 'jquery-easing.js') { // Easing is in effects.core.js, nothing to do
 				if ($this->confArray['jQueryUiVersion'] == '1.9.x') {
-					$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/plugins/jquery.easing.js";
+					$temp_script = t3lib_extMgm::extPath($this->extKey)."Resources/Public/Res/jquery/plugins/jquery.easing.js";
 				} else {
 					$temp_script = NULL;
 				}
 			} elseif (in_array($scriptPart, array('jquery.mousewheel.js', 'jquery.lint.js', 'jquery.mobile.js', 'jquery.cookie.js', 'jquery.migrate.js'))) { // add plugins
-				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/plugins/".$scriptPart;
+				$temp_script = t3lib_extMgm::extPath($this->extKey)."Resources/Public/Res/jquery/plugins/".$scriptPart;
 			} elseif (preg_match("/^TOOLS\:(.*)/", $scriptPart, $reg)) { // add TOOLS
-				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/tools/{$this->confArray['jQueryTOOLSVersion']}/ui/{$reg[1]}";
+				$temp_script = t3lib_extMgm::extPath($this->extKey)."Resources/Public/Res/jquery/tools/{$this->confArray['jQueryTOOLSVersion']}/ui/{$reg[1]}";
 			} elseif (preg_match("/^Bootstrap\:(.*)/", $scriptPart, $reg)) { // add Bootstrap
-				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/bootstrap/{$this->confArray['jQueryBootstrapVersion']}/ui/{$reg[1]}";
+				$temp_script = t3lib_extMgm::extPath($this->extKey)."Resources/Public/Res/jquery/bootstrap/{$this->confArray['jQueryBootstrapVersion']}/ui/{$reg[1]}";
 				if ($compression == 'jsmin') {
 					if (file_exists($temp_script)) {
 						$script_bs .= t3lib_div::getURL($temp_script);
@@ -897,7 +897,7 @@ jQuery(document).ready(function() {
 					$temp_script = NULL;
 				}
 			} else { // add UI
-				$temp_script = t3lib_extMgm::extPath($this->extKey)."res/jquery/ui/{$this->confArray['jQueryUiVersion']}/{$scriptPart}";
+				$temp_script = t3lib_extMgm::extPath($this->extKey)."Resources/Public/Res/jquery/ui/{$this->confArray['jQueryUiVersion']}/{$scriptPart}";
 			}
 			if (file_exists($temp_script)) {
 				$script .= t3lib_div::getURL($temp_script);
