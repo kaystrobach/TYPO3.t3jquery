@@ -89,12 +89,12 @@ if (TYPO3_MODE == 'BE') {
 
 	if (! $confArr['integrateFromCDN']) {
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModulePath(
-			'tx_t3jquery_module1',
+			'tools_txt3jqueryM1',
 			\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Module/'
 		);
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
 			'tools',
-			'tx_t3jquery_module1',
+			'txt3jqueryM1',
 			'',
 			\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Module/'
 		);
