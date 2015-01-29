@@ -39,9 +39,9 @@ $GLOBALS['BE_USER']->modAccess($MCONF,1);
  *
  * @author     Juergen Furrer (juergen.furrer@gmail.com)
  * @package    TYPO3
- * @subpackage \T3Ext\T3jquery\Utility\T3jqueryUtility
+ * @subpackage tx_t3jquery
  */
-class  \T3Ext\T3jquery\Utility\T3jqueryUtility_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
+class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 {
 	var $pageinfo;
 	var $extKey = 't3jquery';
@@ -79,7 +79,7 @@ class  \T3Ext\T3jquery\Utility\T3jqueryUtility_module1 extends \TYPO3\CMS\Backen
 			$version = $this->jQueryVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryConfiguration($version);
+		$this->jQueryConfig = tx_t3jquery::getJqueryConfiguration($version);
 		if (count($this->jQueryConfig['groups']) > 0) {
 			$this->configXML[$array_name] = $this->jQueryConfig['groups'];
 		}
@@ -91,7 +91,7 @@ class  \T3Ext\T3jquery\Utility\T3jqueryUtility_module1 extends \TYPO3\CMS\Backen
 			$version = $this->jQueryUiVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryUiConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryUiConfiguration($version);
+		$this->jQueryUiConfig = tx_t3jquery::getJqueryUiConfiguration($version);
 		if (count($this->jQueryUiConfig['groups']) > 0) {
 			foreach ($this->jQueryUiConfig['groups'] as $group) {
 				$this->configXML[$array_name][] = $group;
@@ -105,7 +105,7 @@ class  \T3Ext\T3jquery\Utility\T3jqueryUtility_module1 extends \TYPO3\CMS\Backen
 			$version = $this->jQueryTOOLSVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryTOOLSConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryToolsConfiguration($version);
+		$this->jQueryTOOLSConfig = tx_t3jquery::getJqueryToolsConfiguration($version);
 		if (count($this->jQueryTOOLSConfig['groups']) > 0) {
 			foreach ($this->jQueryTOOLSConfig['groups'] as $group) {
 				$this->configXML[$array_name][] = $group;
@@ -119,7 +119,7 @@ class  \T3Ext\T3jquery\Utility\T3jqueryUtility_module1 extends \TYPO3\CMS\Backen
 			$version = $this->jQueryBootstrapVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryBootstrapConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryBootstrapConfiguration($version);
+		$this->jQueryBootstrapConfig = tx_t3jquery::getJqueryBootstrapConfiguration($version);
 		if (count($this->jQueryBootstrapConfig['groups']) > 0) {
 			foreach ($this->jQueryBootstrapConfig['groups'] as $group) {
 				$this->configXML[$array_name][] = $group;
@@ -128,9 +128,9 @@ class  \T3Ext\T3jquery\Utility\T3jqueryUtility_module1 extends \TYPO3\CMS\Backen
 		// Define the language object
 		$this->LANG = $GLOBALS['LANG'];
 		// Define the used file directory
-		$this->configDir = PATH_site . \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqPath();
+		$this->configDir = PATH_site . tx_t3jquery::getJqPath();
 		if (! is_dir($this->configDir)) {
-			$this->configDir = PATH_site . 'uploads/\T3Ext\T3jquery\Utility\T3jqueryUtility/';
+			$this->configDir = PATH_site . 'uploads/tx_t3jquery/';
 		}
 		$this->createFolder();
 		$this->initConfig();
@@ -139,7 +139,7 @@ class  \T3Ext\T3jquery\Utility\T3jqueryUtility_module1 extends \TYPO3\CMS\Backen
 
 	/**
 	 * Creates all needed folders and files if not exist
-	 * 
+	 *
 	 * @return	boolean
 	 */
 	function createFolder()
@@ -158,7 +158,7 @@ class  \T3Ext\T3jquery\Utility\T3jqueryUtility_module1 extends \TYPO3\CMS\Backen
 
 	/**
 	 * Create the config-file if not exist
-	 * 
+	 *
 	 * @return	boolean
 	 */
 	function initConfig() {
@@ -436,7 +436,7 @@ jQuery(document).ready(function() {
 					$content = NULL;
 					try {
 						$inst = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_extdeveval_apidisplay');
-						$content = '<hr />'.$inst->main(\TYPO3\CMS\Core\Utility\GeneralUtility::getUrl('../ext_php_api.dat'),'\T3Ext\T3jquery\Utility\T3jqueryUtility');
+						$content = '<hr />'.$inst->main(\TYPO3\CMS\Core\Utility\GeneralUtility::getUrl('../ext_php_api.dat'),'tx_t3jquery');
 					} catch (Exception $e) {
 						$content = $e->getMessage();
 					}
@@ -449,7 +449,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Analyze a JS-File and return all depencies
-	 * 
+	 *
 	 * @param	string	$file
 	 * @return	array
 	 */
@@ -474,7 +474,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Shows the missing controlls (if UI or TOOLS not selected but needed)
-	 * 
+	 *
 	 * @return string
 	 */
 	function displayMissingLibrary()
@@ -504,7 +504,7 @@ jQuery(document).ready(function() {
 			<div class="typo3-message message-warning">
 				<div class="message-header">' . $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.missingLibrary') . '</div>
 				<div class="message-body">
-					' . implode('<br />', $content) . '<br />' . 
+					' . implode('<br />', $content) . '<br />' .
 					'<a href="javascript:void();" onclick="top.goToModule(\'tools_em\',\'\',\'\');this.blur();return false;">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.em').'</a>
 				</div>
 			</div>';
@@ -515,7 +515,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Shows the depencies of all components
-	 * 
+	 *
 	 * @param	array	$requires
 	 * @return	string
 	 */
@@ -558,7 +558,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Matchfile to component name
-	 * 
+	 *
 	 * @param	string	$component
 	 * @return	string
 	 */
@@ -587,7 +587,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Create the packit form
-	 * 
+	 *
 	 * @return	string
 	 */
 	function makePackitoForm()
@@ -616,7 +616,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Create the buttons at the end of the form
-	 * 
+	 *
 	 * @return	string
 	 */
 	function makeProcessForm()
@@ -647,7 +647,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Create the compression formular
-	 * 
+	 *
 	 * @param	string	$compressed
 	 * @return	string
 	 */
@@ -694,7 +694,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Process a t3jquery.txt and retun all depencies
-	 * 
+	 *
 	 * @param	string	$t3jqfile
 	 * @param	array	$dep
 	 * @return	array
@@ -757,7 +757,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Create a checkbox imput field
-	 * 
+	 *
 	 * @return	string
 	 */
 	function makeCheckboxes()
@@ -814,7 +814,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Compress a JS-File
-	 * 
+	 *
 	 * @param	string	$script
 	 * @return	string
 	 */
@@ -859,7 +859,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Create the JS File
-	 * 
+	 *
 	 * @return string
 	 */
 	function createJqFile()
@@ -973,7 +973,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Returns the license to add when compression is activated
-	 * 
+	 *
 	 * @param $script string
 	 * @return string
 	 */
@@ -986,7 +986,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Removes all Documentation
-	 * 
+	 *
 	 * @param $script string
 	 * @return string
 	 */
@@ -1002,15 +1002,15 @@ jQuery(document).ready(function() {
 		$script = str_replace("URL = 'http://", "URL = 'http:\/\/", $script);
 		$script = str_replace('expressInstall:"http://', 'expressInstall:"http:\/\/', $script);
 		$script = str_replace('document.all,j="http://', 'document.all,j="http:\/\/', $script);
-	
+
 		/* Workaround internal for jQuery 1.5.0 */
 		$script = str_replace("/* internal */", "", $script);
-	
+
 		// Remove comments
 		$script = preg_replace('#/\*.*?/\*#',                    "", $script); // remove "/* SINGLE LINE */" comments
 		$script = preg_replace('#(\/\/.*)#',                     "", $script); // remove "//" comments
 		$script = preg_replace('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#', "", $script); // remove "/* MULTI LINE */" comments
-	
+
 		// Remove empty lines
 		$new_script = array();
 		$lines = explode(LF, $script);
@@ -1025,7 +1025,7 @@ jQuery(document).ready(function() {
 			}
 		}
 		$script = implode(LF, $new_script);
-	
+
 		// restore "*/*" for jQuery 1.4.4
 		$script = str_replace("*|/|*", "*/*", $script);
 		// restore "/^\/\//" for jQuery 1.5.0
@@ -1036,24 +1036,24 @@ jQuery(document).ready(function() {
 		$script = str_replace("URL = 'http://", "URL = 'http:\/\/", $script);
 		$script = str_replace('expressInstall:"http:\/\/', 'expressInstall:"http://', $script);
 		$script = str_replace('document.all,j="http:\/\/', 'document.all,j="http://', $script);
-	
+
 		return $script;
 	}
 
 	/**
 	 * Safe the file to disc
-	 * 
+	 *
 	 * @param $block string
 	 * @return void
 	 */
 	function safeJqFile($block='')
 	{
-		\TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($this->configDir . \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqName(), $block);
+		\TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($this->configDir . tx_t3jquery::getJqName(), $block);
 	}
 
 	/**
 	 * Load the config from file
-	 * 
+	 *
 	 * @return array
 	 */
 	function loadJqConf()
@@ -1080,7 +1080,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Save the config to file
-	 * 
+	 *
 	 * @param array $formVars
 	 * @return void
 	 */
@@ -1093,7 +1093,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Merg the existing config with the config from file
-	 * 
+	 *
 	 * @param array $formVars
 	 * @return array
 	 */
@@ -1105,7 +1105,7 @@ jQuery(document).ready(function() {
 
 	/**
 	 * Make the form to define the jQuery Library
-	 * 
+	 *
 	 * @return string
 	 */
 	function makeJqForm()
@@ -1316,7 +1316,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquer
 
 
 // Make instance:
-$SOBE = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\T3Ext\T3jquery\Utility\T3jqueryUtility_module1');
+$SOBE = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_t3jquery_module1');
 $SOBE->init();
 
 
