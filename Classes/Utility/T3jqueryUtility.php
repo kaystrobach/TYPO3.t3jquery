@@ -377,7 +377,7 @@ class T3jqueryUtility
 	* Returns the configuration of jQuery UI
 	* @return array
 	*/
-	function getJqueryConfiguration($version=NULL)
+	static function getJqueryConfiguration($version=NULL)
 	{
 		if ($version === NULL) {
 			$confArr = T3jqueryUtility::getConf();
@@ -391,7 +391,7 @@ class T3jqueryUtility
 	 * Returns the configuration of jQuery UI
 	 * @return array
 	 */
-	function getJqueryUiConfiguration($version=NULL)
+	static function getJqueryUiConfiguration($version=NULL)
 	{
 		if ($version === NULL) {
 			$confArr = T3jqueryUtility::getConf();
@@ -405,7 +405,7 @@ class T3jqueryUtility
 	 * Returns the configuration of jQuery TOOLS
 	 * @return array
 	 */
-	function getJqueryToolsConfiguration($version=NULL)
+	static function getJqueryToolsConfiguration($version=NULL)
 	{
 		if ($version === NULL) {
 			$confArr = T3jqueryUtility::getConf();
@@ -419,7 +419,7 @@ class T3jqueryUtility
 	 * Returns the configuration of jQuery Bootstrap
 	 * @return array
 	 */
-	function getJqueryBootstrapConfiguration($version=NULL)
+	static function getJqueryBootstrapConfiguration($version=NULL)
 	{
 		if ($version === NULL) {
 			$confArr = T3jqueryUtility::getConf();
@@ -480,7 +480,7 @@ class T3jqueryUtility
 	 * Returns the path configuration and JS
 	 * @return string
 	 */
-	function getJqPath()
+	static function getJqPath()
 	{
 		$confArr = T3jqueryUtility::getConf();
 		if (preg_match("/\/$/", $confArr['configDir'])) {
