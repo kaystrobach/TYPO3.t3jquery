@@ -104,8 +104,3 @@ class analyzeJqJS
 		return $this->dependencies;
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/mod1/class.analyzeJqJS.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/mod1/class.analyzeJqJS.php']);
-}
-?>

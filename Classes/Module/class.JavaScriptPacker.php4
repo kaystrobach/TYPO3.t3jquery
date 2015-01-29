@@ -734,8 +734,3 @@ class ParseMaster {
 		return preg_replace($this->ESCAPE, '', $string);
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/mod1/class.JavaScriptPacker.php4']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/mod1/class.JavaScriptPacker.php4']);
-}
-?>

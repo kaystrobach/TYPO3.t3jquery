@@ -7,4 +7,3 @@ $MCONF['access'] = 'user,group';
 
 $MLANG['default']['tabs_images']['tab'] = 'moduleicon.gif';
 $MLANG['default']['ll_ref'] = 'LLL:EXT:t3jquery/Classes/Module/locallang_mod.xml';
-?>

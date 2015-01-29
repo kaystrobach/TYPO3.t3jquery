@@ -6,4 +6,3 @@ if (TYPO3_MODE != 'BE') {
 		\T3Ext\T3jquery\Utility\T3jqueryUtility::addJqJS();
 	}
 }
-?>
