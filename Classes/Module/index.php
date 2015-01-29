@@ -29,7 +29,7 @@
  */
 
 
-$GLOBALS['LANG']->includeLLFile('EXT:t3jquery/mod1/locallang.xml');
+$GLOBALS['LANG']->includeLLFile('EXT:t3jquery/Classes/Module/locallang.xml');
 $GLOBALS['BE_USER']->modAccess($MCONF,1);
 // DEFAULT initialization of a module [END]
 
@@ -39,9 +39,9 @@ $GLOBALS['BE_USER']->modAccess($MCONF,1);
  *
  * @author     Juergen Furrer (juergen.furrer@gmail.com)
  * @package    TYPO3
- * @subpackage tx_t3jquery
+ * @subpackage \T3Ext\T3jquery\Utility\T3jqueryUtility
  */
-class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
+class  \T3Ext\T3jquery\Utility\T3jqueryUtility_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 {
 	var $pageinfo;
 	var $extKey = 't3jquery';
@@ -79,7 +79,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$version = $this->jQueryVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryConfig = tx_t3jquery::getJqueryConfiguration($version);
+		$this->jQueryConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryConfiguration($version);
 		if (count($this->jQueryConfig['groups']) > 0) {
 			$this->configXML[$array_name] = $this->jQueryConfig['groups'];
 		}
@@ -91,7 +91,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$version = $this->jQueryUiVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryUiConfig = tx_t3jquery::getJqueryUiConfiguration($version);
+		$this->jQueryUiConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryUiConfiguration($version);
 		if (count($this->jQueryUiConfig['groups']) > 0) {
 			foreach ($this->jQueryUiConfig['groups'] as $group) {
 				$this->configXML[$array_name][] = $group;
@@ -105,7 +105,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$version = $this->jQueryTOOLSVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryTOOLSConfig = tx_t3jquery::getJqueryToolsConfiguration($version);
+		$this->jQueryTOOLSConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryToolsConfiguration($version);
 		if (count($this->jQueryTOOLSConfig['groups']) > 0) {
 			foreach ($this->jQueryTOOLSConfig['groups'] as $group) {
 				$this->configXML[$array_name][] = $group;
@@ -119,7 +119,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$version = $this->jQueryBootstrapVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryBootstrapConfig = tx_t3jquery::getJqueryBootstrapConfiguration($version);
+		$this->jQueryBootstrapConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryBootstrapConfiguration($version);
 		if (count($this->jQueryBootstrapConfig['groups']) > 0) {
 			foreach ($this->jQueryBootstrapConfig['groups'] as $group) {
 				$this->configXML[$array_name][] = $group;
@@ -128,9 +128,9 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 		// Define the language object
 		$this->LANG = $GLOBALS['LANG'];
 		// Define the used file directory
-		$this->configDir = PATH_site . tx_t3jquery::getJqPath();
+		$this->configDir = PATH_site . \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqPath();
 		if (! is_dir($this->configDir)) {
-			$this->configDir = PATH_site . 'uploads/tx_t3jquery/';
+			$this->configDir = PATH_site . 'uploads/\T3Ext\T3jquery\Utility\T3jqueryUtility/';
 		}
 		$this->createFolder();
 		$this->initConfig();
@@ -182,14 +182,14 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 	{
 		$this->MOD_MENU = array(
 			'function' => array(
-				'1' => $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:function1'),
-				'2' => $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:function2'),
-				'3' => $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:function3'),
-				'4' => $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:function4'),
+				'1' => $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:function1'),
+				'2' => $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:function2'),
+				'3' => $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:function3'),
+				'4' => $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:function4'),
 			)
 		);
 		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('extdeveval')) {
-			$this->MOD_MENU['function'][5] = $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:function5');
+			$this->MOD_MENU['function'][5] = $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:function5');
 		}
 		parent::menuConfig();
 	}
@@ -217,8 +217,8 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$this->doc = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Backend\Template\DocumentTemplate');
 			$this->doc->backPath = $GLOBALS['BACK_PATH'];
 
-			$this->content .= $this->doc->startPage($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
-			$this->content .= $this->doc->header($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
+			$this->content .= $this->doc->startPage($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:title'));
+			$this->content .= $this->doc->header($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:title'));
 			$this->content .= $this->doc->spacer(5);
 
 			// output the used versions
@@ -236,9 +236,9 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 				$temp_version[] = "Bootstrap {$this->confArray['jQueryBootstrapVersion']}";
 			}
 			$this->content .= $this->doc->section(
-				sprintf($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:version_in_use'), implode(" / ", $temp_version))
+				sprintf($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:version_in_use'), implode(" / ", $temp_version))
 			);
-			$this->content .= $this->doc->section('', $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:integrate_from_cdn'));
+			$this->content .= $this->doc->section('', $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:integrate_from_cdn'));
 
 		} else if (($this->id && $access) || ($GLOBALS['BE_USER']->user['admin'] && !$this->id)) {
 			// Draw the header.
@@ -263,8 +263,8 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 </script>
 ';
 
-			$this->content .= $this->doc->startPage($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
-			$this->content .= $this->doc->header($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
+			$this->content .= $this->doc->startPage($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:title'));
+			$this->content .= $this->doc->header($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:title'));
 			$this->content .= $this->doc->spacer(5);
 
 			// Display the errors
@@ -309,7 +309,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$this->content .= $this->doc->section(
 				'',
 				$this->doc->funcMenu(
-					sprintf($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:version_in_use'), implode(" / ", $temp_version)),
+					sprintf($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:version_in_use'), implode(" / ", $temp_version)),
 					\TYPO3\CMS\Backend\Utility\BackendUtility::getFuncMenu($this->id, 'SET[function]', $this->MOD_SETTINGS['function'], $this->MOD_MENU['function'])
 				)
 			);
@@ -331,8 +331,8 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$this->doc = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('mediumDoc');
 			$this->doc->backPath = $GLOBALS['BACK_PATH'];
 
-			$this->content .= $this->doc->startPage($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
-			$this->content .= $this->doc->header($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:title'));
+			$this->content .= $this->doc->startPage($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:title'));
+			$this->content .= $this->doc->header($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:title'));
 			$this->content .= $this->doc->spacer(5);
 			$this->content .= $this->doc->spacer(10);
 		}
@@ -375,12 +375,12 @@ jQuery(document).ready(function() {
 					}
 				}
 				$content .= $this->makeJqForm();
-				$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.header1'), $content ,0 ,1);
+				$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.header1'), $content ,0 ,1);
 				break;
 			}
 			case 2: {
 				$content = $this->makePackitoForm();
-				$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.header2'), $content, 0, 1);
+				$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.header2'), $content, 0, 1);
 				$file = $_FILES['js_local']['tmp_name'] ? $_FILES['js_local']['tmp_name'] : ($_POST['js_remote'] ? \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($_POST['js_remote']) : '');
 				// Form has been submitted
 				if ($file) {
@@ -396,15 +396,15 @@ jQuery(document).ready(function() {
 					// show the dependencies
 					$content = $this->displayDependencies($dep);
 					if (count($dep) == 0) {
-						$content .= '<p>&nbsp;</p><p>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.analyze.packed').'</p>';
+						$content .= '<p>&nbsp;</p><p>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.analyze.packed').'</p>';
 					}
-					$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.analyze.dependencies').' "'.basename($fileName).'"', $content, 0, 1);
+					$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.analyze.dependencies').' "'.basename($fileName).'"', $content, 0, 1);
 				}
 				break;
 			}
 			case 3: {
 				$content = $this->makeProcessForm();
-				$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.header3'), $content, 0, 1);
+				$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.header3'), $content, 0, 1);
 				// Form has been submitted
 				$files = $_POST['ext'];
 				if ($files) {
@@ -421,13 +421,13 @@ jQuery(document).ready(function() {
 
 					// show the dependencies
 					$content = $this->displayDependencies($dep);
-					$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.extension.dependencies'), $content, 0, 1);
+					$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.dependencies'), $content, 0, 1);
 				}
 				break;
 			}
 			case 4: {
 				$content = $this->makeCompressForm($this->compressed);
-				$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.header4'), $content, 0, 1);
+				$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.header4'), $content, 0, 1);
 				break;
 			}
 			case 5: {
@@ -436,11 +436,11 @@ jQuery(document).ready(function() {
 					$content = NULL;
 					try {
 						$inst = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_extdeveval_apidisplay');
-						$content = '<hr />'.$inst->main(\TYPO3\CMS\Core\Utility\GeneralUtility::getUrl('../ext_php_api.dat'),'tx_t3jquery');
+						$content = '<hr />'.$inst->main(\TYPO3\CMS\Core\Utility\GeneralUtility::getUrl('../ext_php_api.dat'),'\T3Ext\T3jquery\Utility\T3jqueryUtility');
 					} catch (Exception $e) {
 						$content = $e->getMessage();
 					}
-					$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.header5'), $content, 0, 1);
+					$this->content .= $this->doc->section($this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.header5'), $content, 0, 1);
 				}
 				break;
 			}
@@ -489,10 +489,10 @@ jQuery(document).ready(function() {
 					foreach ($group['files'] as $file) {
 						if (in_array($file['name'], $this->missingComponents)) {
 							if (preg_match("/^ui\//", $file['file'])) {
-								$content['UI'] = $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.extension.missingLibrary.ui');
+								$content['UI'] = $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.missingLibrary.ui');
 							}
 							if (preg_match("/^TOOLS\:/", $file['file'])) {
-								$content['TOOLS'] = $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.extension.missingLibrary.tools');
+								$content['TOOLS'] = $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.missingLibrary.tools');
 							}
 						}
 					}
@@ -502,10 +502,10 @@ jQuery(document).ready(function() {
 		if (count($content) > 0) {
 			return '
 			<div class="typo3-message message-warning">
-				<div class="message-header">' . $this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.extension.missingLibrary') . '</div>
+				<div class="message-header">' . $this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.missingLibrary') . '</div>
 				<div class="message-body">
 					' . implode('<br />', $content) . '<br />' . 
-					'<a href="javascript:void();" onclick="top.goToModule(\'tools_em\',\'\',\'\');this.blur();return false;">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.extension.em').'</a>
+					'<a href="javascript:void();" onclick="top.goToModule(\'tools_em\',\'\',\'\');this.blur();return false;">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.em').'</a>
 				</div>
 			</div>';
 		} else {
@@ -548,10 +548,10 @@ jQuery(document).ready(function() {
 			$content  = '<dl>'. $dependencies.'</dl>';
 			$content .= $this->doc->divider(5);
 			$content .= '<input type="hidden" name="dependencies" value="'.urlencode(serialize($jqconfig)).'">';
-			$content .= '<a name="jqbuttons"></a><input type="submit" name="usejq" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.usejq').'"> ';
-			$content .= '<input type="submit" name="mergejq" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.mergejq').'">';
+			$content .= '<a name="jqbuttons"></a><input type="submit" name="usejq" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.usejq').'"> ';
+			$content .= '<input type="submit" name="mergejq" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.mergejq').'">';
 		} else {
-			$content = '<strong>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.analyze.none').'</strong>';
+			$content = '<strong>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.analyze.none').'</strong>';
 		}
 		return $content;
 	}
@@ -593,23 +593,23 @@ jQuery(document).ready(function() {
 	function makePackitoForm()
 	{
 		return '
-<br /><p>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.packito.description').'</p><br />
+<br /><p>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.packito.description').'</p><br />
 <table border="0" cellspacing="1" cellpadding="2">
 	<tr>
-		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.packito.remote').'</td>
+		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.packito.remote').'</td>
 		<td><input type="text" name="js_remote" value="'.$_POST['js_remote'].'" id="js_remote" size="50" /></td>
 	</tr>
 	<tr>
-		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.packito.local').'</td>
+		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.packito.local').'</td>
 		<td><input type="file" name="js_local" size="50" /></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td><p>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.packito.note').'</p></td>
+		<td><p>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.packito.note').'</p></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td><p class="submit"><input type="submit" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.check').'" /></p></td>
+		<td><p class="submit"><input type="submit" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.check').'" /></p></td>
 	</tr>
 </table>';
 	}
@@ -622,22 +622,22 @@ jQuery(document).ready(function() {
 	function makeProcessForm()
 	{
 		return '
-<br /><p>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.extension.description').'</p><br />
+<br /><p>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.description').'</p><br />
 <table border="0" cellspacing="1" cellpadding="2" id="process">
 	<tr class="bgColor5">
 		<td>&nbsp;</td>
-		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.extension.title').'</td>
-		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.extension.extkey').'</td>
-		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.extension.version').'</td>
+		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.title').'</td>
+		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.extkey').'</td>
+		<td>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.extension.version').'</td>
 	</tr>
 	'.$this->makeCheckboxes().'
 	<tr>
 		<td colspan="4">
 			<table>
 				<tr>
-					<td><p class="submit"><input type="button" id="select_all" name="select_all" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.selectall').'" /></p></td>
-					<td><p class="submit"><input type="button" id="select_none" name="select_none" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.selectnone').'" /></p></td>
-					<td><p class="submit"><input type="submit" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.check').'" /></p></td>
+					<td><p class="submit"><input type="button" id="select_all" name="select_all" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.selectall').'" /></p></td>
+					<td><p class="submit"><input type="button" id="select_none" name="select_none" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.selectnone').'" /></p></td>
+					<td><p class="submit"><input type="submit" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.check').'" /></p></td>
 				</tr>
 			</table>
 		</td>
@@ -654,25 +654,25 @@ jQuery(document).ready(function() {
 	function makeCompressForm($compressed)
 	{
 		$out = '
-<br /><p>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compress.description').'</p><br />
+<br /><p>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compress.description').'</p><br />
 <table border="0" cellspacing="1" cellpadding="2">
 	<tr>
-		<td colspan="3" class="bgColor5">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compress.compress').'</td>
+		<td colspan="3" class="bgColor5">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compress.compress').'</td>
 	</tr>
 	<tr>
 		<td colspan="3"><textarea cols="80" rows="12" name="compressdata" id="compressdata">'.htmlentities(stripslashes($_POST['compressdata'])).'</textarea></td>
 	</tr>
 	<tr>
-		<td align="right">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compress.nomunge').'</td>
+		<td align="right">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compress.nomunge').'</td>
 		<td>
 			<select name="compression">
-				<option value="1"'.($_POST['compression'] == 1 ? ' selected="selected"' : '').'>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compress.nomunge.yes').'</option>
-				<option value="0"'.($_POST['compression'] != 1 ? ' selected="selected"' : '').'>'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compress.nomunge.no').'</option>
+				<option value="1"'.($_POST['compression'] == 1 ? ' selected="selected"' : '').'>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compress.nomunge.yes').'</option>
+				<option value="0"'.($_POST['compression'] != 1 ? ' selected="selected"' : '').'>'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compress.nomunge.no').'</option>
 			</select>
 		</td>
 		<td>
 			<p class="submit">
-				<input type="submit" id="compress" name="compress" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.compress').'" />
+				<input type="submit" id="compress" name="compress" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.compress').'" />
 			</p>
 		</td>
 	</tr>
@@ -680,7 +680,7 @@ jQuery(document).ready(function() {
 		<td colspan="3">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="3" class="bgColor5">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compress.decompress').'</td>
+		<td colspan="3" class="bgColor5">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compress.decompress').'</td>
 	</tr>
 	<tr>
 		<td colspan="3"><textarea cols="80" rows="12" name="decompressdata" id="decompressdata">'.htmlentities($compressed).'</textarea></td>
@@ -1048,7 +1048,7 @@ jQuery(document).ready(function() {
 	 */
 	function safeJqFile($block='')
 	{
-		\TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($this->configDir . tx_t3jquery::getJqName(), $block);
+		\TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($this->configDir . \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqName(), $block);
 	}
 
 	/**
@@ -1165,44 +1165,44 @@ jQuery(document).ready(function() {
 	</table>
 </div>
 <h2 class="options compression-options">
-	<a href="#" id="compression-tog">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compression').'</a>
+	<a href="#" id="compression-tog">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compression').'</a>
 </h2>
 <table id="download-options">
 	<tr class="radio">
 		<td class="check">
 			<input type="radio" id="compression_jsmin" name="compression" value="jsmin" '.($formVars['compression'] == 'jsmin' || ! $formVars['compression'] ? 'checked="checked"' : '').' />
 		</td>
-		<td class="name"><label for="compression_jsmin">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compression.jsmin.name').'</label></td>
-		<td class="description">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compression.jsmin.description').'</td>
+		<td class="name"><label for="compression_jsmin">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compression.jsmin.name').'</label></td>
+		<td class="description">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compression.jsmin.description').'</td>
 	</tr>
 	<tr class="radio">
 		<td class="check">
 			<input type="radio" id="compression_packer" name="compression" value="packer" '.($formVars['compression'] == 'packer' ? 'checked="checked"' : '').' />
 		</td>
-		<td class="name"><label for="compression_packer">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compression.packer.name').'</label></td>
-		<td class="description">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compression.packer.description').'</td>
+		<td class="name"><label for="compression_packer">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compression.packer.name').'</label></td>
+		<td class="description">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compression.packer.description').'</td>
 	</tr>
 	<tr class="radio">
 		<td class="check">
 			<input type="radio" id="compression_nodocs" name="compression" value="nodocs" '.($formVars['compression'] == 'nodocs' ? 'checked="checked"' : '').' />
 		</td>
-		<td class="name"><label for="compression_nodocs">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compression.nodocs.name').'</label></td>
-		<td class="description">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compression.nodocs.description').'</td>
+		<td class="name"><label for="compression_nodocs">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compression.nodocs.name').'</label></td>
+		<td class="description">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compression.nodocs.description').'</td>
 	</tr>
 	<tr class="radio last">
 		<td class="check">
 			<input type="radio" id="compression_none" name="compression" value="none" '.($formVars['compression'] == 'none' ? 'checked="checked"' : '').' />
 		</td>
-		<td class="name"><label for="compression_none">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compression.none.name').'</label></td>
-		<td class="description">'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.compression.none.description').'</td>
+		<td class="name"><label for="compression_none">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compression.none.name').'</label></td>
+		<td class="description">'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.compression.none.description').'</td>
 	</tr>
 </table>
 <input type="hidden" name="version" value="'.$this->jQueryUiVersion.'" />
 <table>
 	<tr>
-		<td><p class="submit"><input type="button" id="select_all" name="select_all" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.selectall').'" /></p></td>
-		<td><p class="submit"><input type="button" id="select_none" name="select_none" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.selectnone').'" /></p></td>
-		<td><p class="submit"><input type="submit" value="'.$this->LANG->sL('LLL:EXT:t3jquery/mod1/locallang.xml:jquery.button.create').'" /></p></td>
+		<td><p class="submit"><input type="button" id="select_all" name="select_all" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.selectall').'" /></p></td>
+		<td><p class="submit"><input type="button" id="select_none" name="select_none" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.selectnone').'" /></p></td>
+		<td><p class="submit"><input type="submit" value="'.$this->LANG->sL('LLL:EXT:t3jquery/Classes/Module/locallang.xml:jquery.button.create').'" /></p></td>
 	</tr>
 </table>';
 		if ($_GET['createLib'] == 1 && !$_POST) {
@@ -1316,7 +1316,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquer
 
 
 // Make instance:
-$SOBE = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_t3jquery_module1');
+$SOBE = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\T3Ext\T3jquery\Utility\T3jqueryUtility_module1');
 $SOBE->init();
 
 
