@@ -34,18 +34,6 @@ $GLOBALS['BE_USER']->modAccess($MCONF,1);
 // DEFAULT initialization of a module [END]
 
 
-if (intval(PHP_VERSION) < 5) {
-	require_once('class.JavaScriptPacker.php4');
-} else {
-	require_once('class.JavaScriptPacker.php');
-}
-require_once('class.analyzeJqJS.php');
-if (t3lib_extMgm::isLoaded('extdeveval')) {
-	require_once(t3lib_extMgm::extPath('extdeveval') . 'mod1/class.tx_extdeveval_apidisplay.php');
-}
-
-require_once(t3lib_extMgm::extPath('t3jquery') . 'class.tx_t3jquery.php');
-
 /**
  * Module 'jQuery Config' for the 't3jquery' extension.
  *

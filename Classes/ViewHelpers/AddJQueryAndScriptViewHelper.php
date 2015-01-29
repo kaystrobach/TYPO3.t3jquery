@@ -19,6 +19,8 @@
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+namespace T3Ext\T3jquery\ViewHelpers;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * ViewHelper which allows to jquery and additional files
@@ -41,7 +43,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html
  */
 
-class Tx_T3jquery_ViewHelpers_AddJQueryAndScriptViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class AddJQueryAndScriptViewHelper extends AbstractTagBasedViewHelper {
 	/**
 	 * @param string $jsfile
 	 * @param string $jsurl
@@ -99,4 +101,3 @@ class Tx_T3jquery_ViewHelpers_AddJQueryAndScriptViewHelper extends Tx_Fluid_Core
 		return '';
 	}
 }
-?>

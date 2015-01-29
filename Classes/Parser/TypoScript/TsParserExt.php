@@ -25,7 +25,10 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
+namespace T3Ext\T3jquery\Parser\TypoScript;
+use T3Ext\T3jquery\Utility\T3jqueryUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class that renders fields for the extensionmanager configuration
@@ -34,7 +37,7 @@ require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
  * @package    TYPO3
  * @subpackage tx_t3jquery
  */
-class tx_t3jquery_tsparserext
+class TsParserExt
 {
 	/**
 	 * Supported jQuery UI-Versions
@@ -61,26 +64,26 @@ class tx_t3jquery_tsparserext
 	public function displayMessage(&$params, &$tsObj)
 	{
 		$out = '';
-		if (tx_t3jquery::getIntFromVersion(TYPO3_version) < 4003000) {
+		if (T3jqueryUtility::getIntFromVersion(TYPO3_version) < 4003000) {
 			// 4.3.0 comes with flashmessages styles. For older versions we include the needed styles here
-			$cssPath = $GLOBALS['BACK_PATH'] . t3lib_extMgm::extRelPath('t3jquery');
+			$cssPath = $GLOBALS['BACK_PATH'] . ExtensionManagementUtility::extRelPath('t3jquery');
 			$out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
 		}
 		// get all supported UI-Versions from folder
-		$supportedUiVersions = t3lib_div::get_dirs(t3lib_div::getFileAbsFileName("EXT:t3jquery/res/jquery/ui/"));
+		$supportedUiVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/res/jquery/ui/"));
 		if (is_array($supportedUiVersions)) {
 			foreach ($supportedUiVersions as $supportedUiVersion) {
-				if (file_exists(t3lib_div::getFileAbsFileName("EXT:t3jquery/res/jquery/ui/").$supportedUiVersion.'/jquery.xml')) {
+				if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/res/jquery/ui/").$supportedUiVersion.'/jquery.xml')) {
 					$this->supportedUiVersion[] = $supportedUiVersion;
 				}
 			}
 		}
 
 		// get all supported TOOLS-Versions from folder
-		$supportedToolsVersions = t3lib_div::get_dirs(t3lib_div::getFileAbsFileName("EXT:t3jquery/res/jquery/tools/"));
+		$supportedToolsVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/res/jquery/tools/"));
 		if (is_array($supportedToolsVersions)) {
 			foreach ($supportedToolsVersions as $supportedToolsVersion) {
-				if (file_exists(t3lib_div::getFileAbsFileName("EXT:t3jquery/res/jquery/tools/").$supportedToolsVersion.'/jquery.xml')) {
+				if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/res/jquery/tools/").$supportedToolsVersion.'/jquery.xml')) {
 					$this->supportedToolsVersion[] = $supportedToolsVersion;
 				}
 			}
@@ -89,7 +92,7 @@ class tx_t3jquery_tsparserext
 		// get the conf array
 		$this->confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['t3jquery']);
 		// if form is submited, the POST values are taken
-		$post = t3lib_div::_POST();
+		$post = GeneralUtility::_POST();
 		if (count($post) > 0) {
 			$jQueryUiVersion    = $post['data']['jQueryUiVersion'];
 			$jQueryToolsVersion = $post['data']['jQueryTOOLSVersion'];
@@ -99,14 +102,14 @@ class tx_t3jquery_tsparserext
 			$jQueryUiVersion    = $this->confArr['jQueryUiVersion'];
 			$jQueryToolsVersion = $this->confArr['jQueryTOOLSVersion'];
 			$jQueryVersion      = T3JQUERYVERSION;
-			$configDir          = tx_t3jquery::getJqPath();
+			$configDir          = T3jqueryUtility::getJqPath();
 		}
 		if ($this->checkConfig() === FALSE) {
 			$out .= '
 	<div class="typo3-message message-warning">
-		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.checkConfigHeader') . '</div>
+		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.checkConfigHeader') . '</div>
 		<div class="message-body">
-			' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.checkConfig') . '
+			' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.checkConfig') . '
 		</div>
 	</div>';
 		} elseif ($this->confArr['integrateFromCDN'] || $post['data']['integrateFromCDN']) {
@@ -119,20 +122,20 @@ class tx_t3jquery_tsparserext
 			) {
 				$out .= '
 	<div class="typo3-message message-information">
-		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.updatermsgHeader') . '</div>
+		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.updatermsgHeader') . '</div>
 		<div class="message-body">
-			' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.updatermsg') . '
+			' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.updatermsg') . '
 		</div>
 	</div>';
 			}
 			// Check if the library exists
-			if (! file_exists(PATH_site . $configDir . tx_t3jquery::getJqName())) {
+			if (! file_exists(PATH_site . $configDir . T3jqueryUtility::getJqName())) {
 				$out .= '
 	<a href="javascript:void();" onclick="top.goToModule(\'tools_txt3jqueryM1\',\'\',\'createLib=1\');this.blur();return false;">
 		<div class="typo3-message message-warning">
-			<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.updatermsgHeader2') . '</div>
+			<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.updatermsgHeader2') . '</div>
 			<div class="message-body">
-				' . sprintf($GLOBALS['LANG']->sL('LLL:EXT:t3jquery/locallang.xml:extmng.updatermsg2'), $configDir . tx_t3jquery::getJqName()) . '
+				' . sprintf($GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.updatermsg2'), $configDir . T3jqueryUtility::getJqName()) . '
 			</div>
 		</div>
 	</a>';
@@ -173,8 +176,3 @@ class tx_t3jquery_tsparserext
 		return true;
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/lib/class.tx_t3jquery_tsparserext.php']) {
-	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/lib/class.tx_t3jquery_tsparserext.php']);
-}
-?>

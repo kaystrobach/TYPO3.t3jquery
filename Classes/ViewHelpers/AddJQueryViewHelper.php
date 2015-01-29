@@ -19,6 +19,11 @@
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+namespace T3Ext\T3jquery\ViewHelpers;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use T3Ext\T3jquery\Utility\T3jqueryUtility;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+
 /**
  * ViewHelper which allows to jquery
  *
@@ -38,22 +43,19 @@
  * @license http://www.gnu.org/copyleft/gpl.html
  */
 
-class Tx_T3jquery_ViewHelpers_AddJQueryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractTagBasedViewHelper {
+class AddJQueryViewHelper extends AbstractTagBasedViewHelper {
 	/**
-	* Adds T3Jquery as Lib
-	* @param string color 
-	* @param string delta	
+	 * Adds T3Jquery as Lib
+	 * @return string
 	*/
 	public function render() {
 			// checks if t3jquery is loaded
-		if (t3lib_extMgm::isLoaded('t3jquery')) {
-			require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
+		if (ExtensionManagementUtility::isLoaded('t3jquery')) {
 		}
 			// if t3jquery is loaded and the custom Library had been created
 		if (T3JQUERY === true) {
-			tx_t3jquery::addJqJS();
+			T3jqueryUtility::addJqJS();
 		}
 		return '';
 	}
 }
-?>

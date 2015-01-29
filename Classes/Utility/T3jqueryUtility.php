@@ -26,7 +26,13 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-$confArr = tx_t3jquery::getConf();
+namespace T3Ext\T3jquery\Utility;
+
+use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+
+$confArr = T3jqueryUtility::getConf();
 if ($_POST['data']['jQueryVersion']) {
 	$t3jqueryversion = $_POST['data']['jQueryVersion'];
 	if ($_POST['data']['jQueryUiVersion']) {
@@ -52,9 +58,9 @@ if ($_POST['data']['jQueryVersion']) {
 }
 define('T3JQUERYVERSION', $t3jqueryversion);
 
-if (file_exists(PATH_site . tx_t3jquery::getJqPath() . tx_t3jquery::getJqName()) || ($confArr['integrateFromCDN'] && isset($confArr['locationCDN']))) {
+if (file_exists(PATH_site . T3jqueryUtility::getJqPath() . T3jqueryUtility::getJqName()) || ($confArr['integrateFromCDN'] && isset($confArr['locationCDN']))) {
 	// check if dontIntegrateOnUID fit to the actual page
-	if (tx_t3jquery::isIntegrated()) {
+	if (T3jqueryUtility::isIntegrated()) {
 		define('T3JQUERY', TRUE);
 	}
 }
@@ -66,18 +72,18 @@ if (file_exists(PATH_site . tx_t3jquery::getJqPath() . tx_t3jquery::getJqName())
  *
  * USE:
  * The class is intended to be used without creating an instance of it.
- * So: Don't instantiate - call functions with "tx_t3jquery::" prefixed the function name.
- * So use tx_t3jquery::[method-name] to refer to the functions, eg. 'tx_t3jquery::addJqJS()'
+ * So: Don't instantiate - call functions with "T3jqueryUtility::" prefixed the function name.
+ * So use T3jqueryUtility::[method-name] to refer to the functions, eg. 'T3jqueryUtility::addJqJS()'
  *
  * Example:
  *
  * if (t3lib_extMgm::isLoaded('t3jquery')) {
- *   require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
+ *   require_once(t3lib_extMgm::extPath('t3jquery').'class.T3jqueryUtility.php');
  * }
  *
  *
  * if (T3JQUERY === TRUE) {
- *   tx_t3jquery::addJqJS();
+ *   T3jqueryUtility::addJqJS();
  * } else {
  *   // Here you add your own version of jQuery library, which is used if the
  *   // "t3jquery" extension is not installed.
@@ -88,7 +94,7 @@ if (file_exists(PATH_site . tx_t3jquery::getJqPath() . tx_t3jquery::getJqName())
  * @package TYPO3
  * @subpackage t3jquery
  */
-class tx_t3jquery
+class T3jqueryUtility
 {
 	/**
 	 * Adds the jquery script tag to the page headers first place
@@ -97,15 +103,15 @@ class tx_t3jquery
 	 */
 	function addJqJS()
 	{
-		if (tx_t3jquery::getIntFromVersion(TYPO3_version) >= 4003000) {
-			$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess']['t3jquery'] = 'EXT:t3jquery/class.tx_t3jquery.php:&tx_t3jquery->addJqJsByHook';
+		if (T3jqueryUtility::getIntFromVersion(TYPO3_version) >= 4003000) {
+			$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.PageRenderer.php']['render-preProcess']['t3jquery'] = 'EXT:t3jquery/class.T3jqueryUtility.php:&T3jqueryUtility->addJqJsByHook';
 		} else {
-			$confArr = tx_t3jquery::getConf();
+			$confArr = T3jqueryUtility::getConf();
 			// Override the headerdata, THX to S. Delcroix (RVVN -  sdelcroix@rvvn.org)
 			$block = NULL;
 			if ($confArr['integrateFromCDN'] && isset($confArr['locationCDN'])) {
 				$params = array();
-				tx_t3jquery::getCdnScript($params);
+				T3jqueryUtility::getCdnScript($params);
 				if (isset($params['jsLibs'])) {
 					foreach ($params['jsLibs'] as $key => $param) {
 						$block .= '<script type="text/javascript" src="'.$param['file'].'"></script>';
@@ -117,7 +123,7 @@ class tx_t3jquery
 					}
 				}
 			} else {
-				$block .= tx_t3jquery::getJqJS();
+				$block .= T3jqueryUtility::getJqJS();
 			}
 			if ($confArr['integrateToFooter']) {
 				$GLOBALS['TSFE']->additionalFooterData['t3jquery.lib'] = $block;
@@ -134,11 +140,11 @@ class tx_t3jquery
 	 */
 	function getSection()
 	{
-		$confArr = tx_t3jquery::getConf();
+		$confArr = T3jqueryUtility::getConf();
 		if ($confArr['integrateToFooter']) {
-			return t3lib_PageRenderer::PART_FOOTER;
+			return PageRenderer::PART_FOOTER;
 		} else {
-			return t3lib_PageRenderer::PART_HEADER;
+			return PageRenderer::PART_HEADER;
 		}
 	}
 
@@ -149,31 +155,31 @@ class tx_t3jquery
 	 */
 	function getCdnScript(&$params=array())
 	{
-		$confArr = tx_t3jquery::getConf();
+		$confArr = T3jqueryUtility::getConf();
 		// The dev version does not exist...
 		if (substr($confArr['jQueryTOOLSVersion'], -3) == 'dev') {
-			t3lib_div::devLog('jQuery TOOLS Version \''.$confArr['jQueryTOOLSVersion'].'\' not in CDN', 't3jquery', 1);
+			GeneralUtility::devLog('jQuery TOOLS Version \''.$confArr['jQueryTOOLSVersion'].'\' not in CDN', 't3jquery', 1);
 			$confArr['jQueryTOOLSVersion'] = '1.2.5';
 		}
 		$temp_config = array();
 		// CDN version for jQuery (t3jquery 2.0.0)
 		if (preg_match("/x$/", $confArr['jQueryVersion'])) {
-			$temp_config = $this->jQueryTOOLSConfig = tx_t3jquery::getJqueryConfiguration();
+			$temp_config = $this->jQueryTOOLSConfig = T3jqueryUtility::getJqueryConfiguration();
 			$confArr['jQueryVersion'] = $temp_config['version']['cdn'];
 		}
 		// CDN version for jQueryUI (t3jquery 2.0.0)
 		if (preg_match("/x$/", $confArr['jQueryUiVersion'])) {
-			$temp_config = $this->jQueryTOOLSConfig = tx_t3jquery::getJqueryUiConfiguration();
+			$temp_config = $this->jQueryTOOLSConfig = T3jqueryUtility::getJqueryUiConfiguration();
 			$confArr['jQueryUiVersion'] = $temp_config['version']['cdn'];
 		}
 		// CDN version for TOOLS (t3jquery 2.0.0)
 		if (preg_match("/x$/", $confArr['jQueryTOOLSVersion'])) {
-			$temp_config = $this->jQueryTOOLSConfig = tx_t3jquery::getJqueryToolsConfiguration();
+			$temp_config = $this->jQueryTOOLSConfig = T3jqueryUtility::getJqueryToolsConfiguration();
 			$confArr['jQueryTOOLSVersion'] = $temp_config['version']['cdn'];
 		}
 		// CDN version for Bootstrap (t3jquery 2.0.0)
 		if (preg_match("/x$/", $confArr['jQueryBootstrapVersion'])) {
-			$temp_config = $this->jQueryTOOLSConfig = tx_t3jquery::getJqueryBootstrapConfiguration();
+			$temp_config = $this->jQueryTOOLSConfig = T3jqueryUtility::getJqueryBootstrapConfiguration();
 			$confArr['jQueryBootstrapVersion'] = $temp_config['version']['cdn'];
 		}
 		switch ($confArr['locationCDN']) {
@@ -210,9 +216,9 @@ class tx_t3jquery
 					);
 				}
 				if ($confArr['jQueryBootstrapVersion'] != '') {
-					if (tx_t3jquery::getIntFromVersion($confArr['jQueryBootstrapVersion']) < 3000000) {
+					if (T3jqueryUtility::getIntFromVersion($confArr['jQueryBootstrapVersion']) < 3000000) {
 						if ($confArr['jQueryBootstrapVersion'] == '2.2.0') {
-							t3lib_div::devLog('jQuery Bootstrap \''.$confArr['jQueryBootstrapVersion'].'\' not available', 't3jquery', 1);
+							GeneralUtility::devLog('jQuery Bootstrap \''.$confArr['jQueryBootstrapVersion'].'\' not available', 't3jquery', 1);
 							$confArr['jQueryBootstrapVersion'] = '2.2.2';
 						}
 						$jsFile = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$confArr['jQueryBootstrapVersion'].'/js/bootstrap.min.js';
@@ -243,7 +249,7 @@ class tx_t3jquery
 					);
 				} else {
 					if ($confArr['jQueryVersion'] == '2.0.0b1') {
-						t3lib_div::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in Google-CDN', 't3jquery', 1);
+						GeneralUtility::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in Google-CDN', 't3jquery', 1);
 						$confArr['jQueryVersion'] = '1.9.1';
 					}
 					$params['jsLibs']['jQuery'] = array(
@@ -267,9 +273,9 @@ class tx_t3jquery
 					);
 				}
 				if ($confArr['jQueryBootstrapVersion'] != '') {
-					if (tx_t3jquery::getIntFromVersion($confArr['jQueryBootstrapVersion']) < 3000000) {
+					if (T3jqueryUtility::getIntFromVersion($confArr['jQueryBootstrapVersion']) < 3000000) {
 						if ($confArr['jQueryBootstrapVersion'] == '2.2.0') {
-							t3lib_div::devLog('jQuery Bootstrap \''.$confArr['jQueryBootstrapVersion'].'\' not available', 't3jquery', 1);
+							GeneralUtility::devLog('jQuery Bootstrap \''.$confArr['jQueryBootstrapVersion'].'\' not available', 't3jquery', 1);
 							$confArr['jQueryBootstrapVersion'] = '2.2.2';
 						}
 						$jsFile = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$confArr['jQueryBootstrapVersion'].'/js/bootstrap.min.js';
@@ -300,11 +306,11 @@ class tx_t3jquery
 					);
 				} else {
 					if ($confArr['jQueryVersion'] == '2.0.0b1') {
-						t3lib_div::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in MSN-CDN', 't3jquery', 1);
+						GeneralUtility::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in MSN-CDN', 't3jquery', 1);
 						$confArr['jQueryVersion'] = '1.9.1';
 					}
-					if (tx_t3jquery::getIntFromVersion($confArr['jQueryVersion']) < 1003002) {
-						t3lib_div::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in MSN-CDN', 't3jquery', 1);
+					if (T3jqueryUtility::getIntFromVersion($confArr['jQueryVersion']) < 1003002) {
+						GeneralUtility::devLog('jQuery \''.$confArr['jQueryVersion'].'\' not in MSN-CDN', 't3jquery', 1);
 						$confArr['jQueryVersion'] = '1.3.2';
 					}
 					// The MSN CDN does not support 1.x.0 version it's only available under 1.x
@@ -321,12 +327,12 @@ class tx_t3jquery
 					);
 				}
 				if ($confArr['jQueryUiVersion'] != '') {
-					if (tx_t3jquery::getIntFromVersion($confArr['jQueryUiVersion']) < 1008005) {
-						t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in MSN-CDN', 't3jquery', 1);
+					if (T3jqueryUtility::getIntFromVersion($confArr['jQueryUiVersion']) < 1008005) {
+						GeneralUtility::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in MSN-CDN', 't3jquery', 1);
 						$confArr['jQueryUiVersion'] = '1.8.5';
 					}
-					if (tx_t3jquery::getIntFromVersion($confArr['jQueryUiVersion']) == 1008024) {
-						t3lib_div::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in MSN-CDN', 't3jquery', 1);
+					if (T3jqueryUtility::getIntFromVersion($confArr['jQueryUiVersion']) == 1008024) {
+						GeneralUtility::devLog('jQuery UI \''.$confArr['jQueryUiVersion'].'\' not in MSN-CDN', 't3jquery', 1);
 						$confArr['jQueryUiVersion'] = '1.8.23';
 					}
 					$jsFile = '//ajax.aspnetcdn.com/ajax/jquery.ui/'.$confArr['jQueryUiVersion'].'/jquery-ui.min.js';
@@ -340,9 +346,9 @@ class tx_t3jquery
 					);
 				}
 				if ($confArr['jQueryBootstrapVersion'] != '') {
-					if (tx_t3jquery::getIntFromVersion($confArr['jQueryBootstrapVersion']) < 3000000) {
+					if (T3jqueryUtility::getIntFromVersion($confArr['jQueryBootstrapVersion']) < 3000000) {
 						if ($confArr['jQueryBootstrapVersion'] == '2.2.0') {
-							t3lib_div::devLog('jQuery Bootstrap \''.$confArr['jQueryBootstrapVersion'].'\' not available', 't3jquery', 1);
+							GeneralUtility::devLog('jQuery Bootstrap \''.$confArr['jQueryBootstrapVersion'].'\' not available', 't3jquery', 1);
 							$confArr['jQueryBootstrapVersion'] = '2.2.2';
 						}
 						$jsFile = '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$confArr['jQueryBootstrapVersion'].'/js/bootstrap.min.js';
@@ -361,7 +367,7 @@ class tx_t3jquery
 				break;
 			}
 			default : {
-				t3lib_div::devLog('Unknown CDN-Provider: \''.$confArr['locationCDN'].'\'', 't3jquery', 3);
+				GeneralUtility::devLog('Unknown CDN-Provider: \''.$confArr['locationCDN'].'\'', 't3jquery', 3);
 				break;
 			}
 		}
@@ -374,10 +380,10 @@ class tx_t3jquery
 	function getJqueryConfiguration($version=NULL)
 	{
 		if ($version === NULL) {
-			$confArr = tx_t3jquery::getConf();
+			$confArr = T3jqueryUtility::getConf();
 			$version = $confArr['jQueryVersion'];
 		}
-		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/core/'.$version.'/jquery.xml')));
+		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/res/jquery/core/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 
@@ -388,10 +394,10 @@ class tx_t3jquery
 	function getJqueryUiConfiguration($version=NULL)
 	{
 		if ($version === NULL) {
-			$confArr = tx_t3jquery::getConf();
+			$confArr = T3jqueryUtility::getConf();
 			$version = $confArr['jQueryUiVersion'];
 		}
-		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/ui/'.$version.'/jquery.xml')));
+		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/res/jquery/ui/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 
@@ -402,10 +408,10 @@ class tx_t3jquery
 	function getJqueryToolsConfiguration($version=NULL)
 	{
 		if ($version === NULL) {
-			$confArr = tx_t3jquery::getConf();
+			$confArr = T3jqueryUtility::getConf();
 			$version = $confArr['jQueryTOOLSVersion'];
 		}
-		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/tools/'.$version.'/jquery.xml')));
+		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/res/jquery/tools/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 
@@ -416,10 +422,10 @@ class tx_t3jquery
 	function getJqueryBootstrapConfiguration($version=NULL)
 	{
 		if ($version === NULL) {
-			$confArr = tx_t3jquery::getConf();
+			$confArr = T3jqueryUtility::getConf();
 			$version = $confArr['jQueryBootstrapVersion'];
 		}
-		$configuration = t3lib_div::xml2array(t3lib_div::getUrl(t3lib_div::getFileAbsFileName('EXT:t3jquery/res/jquery/bootstrap/'.$version.'/jquery.xml')));
+		$configuration = GeneralUtility::xml2array(GeneralUtility::getUrl(GeneralUtility::getFileAbsFileName('EXT:t3jquery/res/jquery/bootstrap/'.$version.'/jquery.xml')));
 		return $configuration;
 	}
 
@@ -431,13 +437,13 @@ class tx_t3jquery
 	 */
 	function addJqJsByHook($params)
 	{
-		$confArr = tx_t3jquery::getConf();
-		if (tx_t3jquery::isIntegrated()) {
+		$confArr = T3jqueryUtility::getConf();
+		if (T3jqueryUtility::isIntegrated()) {
 			if ($confArr['integrateFromCDN'] && isset($confArr['locationCDN'])) {
-				tx_t3jquery::getCdnScript($params);
+				T3jqueryUtility::getCdnScript($params);
 			} else {
 				$params['jsLibs']['jQuery'] = array(
-					'file'       => tx_t3jquery::getJqJS(TRUE),
+					'file'       => T3jqueryUtility::getJqJS(TRUE),
 					'type'       => 'text/javascript',
 					'section'    => self::getSection(),
 					'compress'   => FALSE,
@@ -447,7 +453,7 @@ class tx_t3jquery
 			}
 			define('T3JQUERY', TRUE);
 		} else {
-			t3lib_div::devLog('PID \'' . $GLOBALS['TSFE']->id . '\' in dontIntegrateOnUID', 't3jquery', 1);
+			GeneralUtility::devLog('PID \'' . $GLOBALS['TSFE']->id . '\' in dontIntegrateOnUID', 't3jquery', 1);
 			define('T3JQUERY', FALSE);
 		}
 	}
@@ -459,15 +465,15 @@ class tx_t3jquery
 	 */
 	function isIntegrated()
 	{
-		$confArr = tx_t3jquery::getConf();
+		$confArr = T3jqueryUtility::getConf();
 		if (is_object($GLOBALS['TSFE']) and count($GLOBALS['TSFE']->rootLine) > 0) {
 			foreach ($GLOBALS['TSFE']->rootLine as $page) {
-				if (in_array($page['uid'], array_values(t3lib_div::trimExplode(',', $confArr['dontIntegrateInRootline'], TRUE)))) {
+				if (in_array($page['uid'], array_values(GeneralUtility::trimExplode(',', $confArr['dontIntegrateInRootline'], TRUE)))) {
 					return FALSE;
 				}
 			}
 		}
-		return (! $confArr['dontIntegrateOnUID'] || ! is_object($GLOBALS['TSFE']) || ! in_array($GLOBALS['TSFE']->id, array_values(t3lib_div::trimExplode(',', $confArr['dontIntegrateOnUID'], TRUE))));
+		return (! $confArr['dontIntegrateOnUID'] || ! is_object($GLOBALS['TSFE']) || ! in_array($GLOBALS['TSFE']->id, array_values(GeneralUtility::trimExplode(',', $confArr['dontIntegrateOnUID'], TRUE))));
 	}
 
 	/**
@@ -476,7 +482,7 @@ class tx_t3jquery
 	 */
 	function getJqPath()
 	{
-		$confArr = tx_t3jquery::getConf();
+		$confArr = T3jqueryUtility::getConf();
 		if (preg_match("/\/$/", $confArr['configDir'])) {
 			return $confArr['configDir'];
 		} else {
@@ -492,7 +498,7 @@ class tx_t3jquery
 	 */
 	function getJqJS($urlOnly=FALSE)
 	{
-		$url = tx_t3jquery::getJqPath() . tx_t3jquery::getJqName();
+		$url = T3jqueryUtility::getJqPath() . T3jqueryUtility::getJqName();
 		if (file_exists(PATH_site . $url)) {
 			// Adding absRefPrefix here, makes sure that jquery gets included correctly
 			$url = $GLOBALS['TSFE']->absRefPrefix . $url;
@@ -502,7 +508,7 @@ class tx_t3jquery
 				return '<script type="text/javascript" src="' . $url . '"></script>';
 			}
 		} else {
-			t3lib_div::devLog('\'' . tx_t3jquery::getJqName() . '\' does not exists!', 't3jquery', 3);
+			GeneralUtility::devLog('\'' . T3jqueryUtility::getJqName() . '\' does not exists!', 't3jquery', 3);
 		}
 		return FALSE;
 	}
@@ -515,16 +521,16 @@ class tx_t3jquery
 	 */
 	function getJqJSBE($urlOnly=FALSE)
 	{
-		$file = tx_t3jquery::getJqPath() . tx_t3jquery::getJqName();
+		$file = T3jqueryUtility::getJqPath() . T3jqueryUtility::getJqName();
 		if (file_exists(PATH_site . $file)) {
-			$url = t3lib_div::resolveBackPath($GLOBALS['BACK_PATH'] . '../' . $file);
+			$url = GeneralUtility::resolveBackPath($GLOBALS['BACK_PATH'] . '../' . $file);
 			if ($urlOnly) {
 				return $url;
 			} else {
 				return '<script type="text/javascript" src="' . $url . '"></script>';
 			}
 		} else {
-			t3lib_div::devLog('\''.tx_t3jquery::getJqName().'\' does not exists!', 't3jquery', 3);
+			GeneralUtility::devLog('\''.T3jqueryUtility::getJqName().'\' does not exists!', 't3jquery', 3);
 		}
 		return FALSE;
 	}
@@ -534,7 +540,7 @@ class tx_t3jquery
 	 */
 	function getJqName()
 	{
-		$confArr = tx_t3jquery::getConf();
+		$confArr = T3jqueryUtility::getConf();
 		if ($_POST['data']['jqLibFilename']) {
 			$confArr['jqLibFilename'] = $_POST['data']['jqLibFilename'];
 		}
@@ -556,11 +562,7 @@ class tx_t3jquery
 	 */
 	function getIntFromVersion($versionString=NULL)
 	{
-		if (class_exists(t3lib_utility_VersionNumber)) {
-			return t3lib_utility_VersionNumber::convertVersionNumberToInteger($versionString);
-		} else {
-			return t3lib_div::int_from_ver($versionString);
-		}
+		return VersionNumberUtility::convertVersionNumberToInteger($versionString);
 	}
 
 	/**
@@ -581,9 +583,9 @@ class tx_t3jquery
 	 *
 	 * Usage:
 	 *
-	 * includeLibs.t3jquery = EXT:t3jquery/class.tx_t3jquery.php
+	 * includeLibs.t3jquery = EXT:t3jquery/class.T3jqueryUtility.php
 	 * page.10 = USER
-	 * page.10.userFunc = tx_t3jquery->addJS
+	 * page.10.userFunc = T3jqueryUtility->addJS
 	 * page.10.jsfile = fileadmin/testscript.js
 	 * page.10.jsurl = http://www.example.com/script.js
 	 * page.10.jsdata = alert('Hello World!');
@@ -603,35 +605,35 @@ class tx_t3jquery
 		// set the cObj from TSFE
 		$cObj = $GLOBALS['TSFE']->cObj;
 		// Set the tofooter to TRUE if integrateToFooter is set
-		$confArr = tx_t3jquery::getConf();
+		$confArr = T3jqueryUtility::getConf();
 		if ($confArr['integrateToFooter']) {
 			$conf['tofooter'] = 'footer';
 		}
 		// If the jQuery lib is not added to page yet, add it!
-		tx_t3jquery::addJqJS();
+		T3jqueryUtility::addJqJS();
 		// where should be the data stored (footer or header) / Fix moveJsFromHeaderToFooter (add all scripts to the footer)
 		$conf['tofooter'] = ($conf['tofooter'] || $GLOBALS['TSFE']->config['config']['moveJsFromHeaderToFooter'] ? 'footer' : 'header');
 		$conf['compress'] = ($conf['compress'] || $conf['jsminify']);
 		$conf['type']     = $conf['type'] ? $conf['type'] : 'text/javascript';
 		// Append JS file
 		if ($conf['jsfile'] || $conf['jsfile.']) {
-			$jsfile = preg_replace('|^'.PATH_site.'|i','', t3lib_div::getFileAbsFileName($cObj->stdWrap($conf['jsfile'], $conf['jsfile.'])));
+			$jsfile = preg_replace('|^'.PATH_site.'|i','', GeneralUtility::getFileAbsFileName($cObj->stdWrap($conf['jsfile'], $conf['jsfile.'])));
 			// Add the Javascript if file exists
 			if ($jsfile != '' && file_exists(PATH_site . $jsfile)) {
-				tx_t3jquery::addJsFile($jsfile, $conf);
+				T3jqueryUtility::addJsFile($jsfile, $conf);
 			} else {
-				t3lib_div::devLog('\''.$jsfile.'\' does not exists!', 't3jquery', 2);
+				GeneralUtility::devLog('\''.$jsfile.'\' does not exists!', 't3jquery', 2);
 			}
 		}
 		// add JS URL
 		if ($conf['jsurl'] || $conf['jsurl.']) {
-			tx_t3jquery::addJsFile($cObj->stdWrap($conf['jsurl'], $conf['jsurl.']), $conf);
+			T3jqueryUtility::addJsFile($cObj->stdWrap($conf['jsurl'], $conf['jsurl.']), $conf);
 		}
 		// add JS data
 		if ($conf['jsdata'] || $conf['jsdata.']) {
 			$jsdata = trim($cObj->stdWrap($conf['jsdata'], $conf['jsdata.']));
 			if ($jsdata != '') {
-				tx_t3jquery::addJsInlineCode(md5($jsdata), $jsdata, $conf);
+				T3jqueryUtility::addJsInlineCode(md5($jsdata), $jsdata, $conf);
 			}
 		}
 		// add JS ready code
@@ -639,7 +641,7 @@ class tx_t3jquery
 			$jsready = trim($cObj->stdWrap($conf['jsready'], $conf['jsready.']));
 			if ($jsready != '') {
 				$temp_js = 'jQuery(document).ready(function() {'.$jsready.'});';
-				tx_t3jquery::addJsInlineCode(md5($jsready), $temp_js, $conf);
+				T3jqueryUtility::addJsInlineCode(md5($jsready), $temp_js, $conf);
 			}
 		}
 	}
@@ -653,7 +655,7 @@ class tx_t3jquery
 	 */
 	function addJsFile($file, $conf=array())
 	{
-		if (tx_t3jquery::getIntFromVersion(TYPO3_version) >= 4003000) {
+		if (T3jqueryUtility::getIntFromVersion(TYPO3_version) >= 4003000) {
 			$pagerender = $GLOBALS['TSFE']->getPageRenderer();
 			if ($conf['tofooter'] == 'footer') {
 				$pagerender->addJsFooterFile($file, $conf['type'], $conf['compress'], $conf['forceOnTop'], $conf['allWrap']);
@@ -682,7 +684,7 @@ class tx_t3jquery
 	{
 		if ($conf['jsinline']) {
 			$GLOBALS['TSFE']->inlineJS['t3jquery.jsdata.' . $name] = $block;
-		} elseif (tx_t3jquery::getIntFromVersion(TYPO3_version) >= 4003000) {
+		} elseif (T3jqueryUtility::getIntFromVersion(TYPO3_version) >= 4003000) {
 			$pagerender = $GLOBALS['TSFE']->getPageRenderer();
 			if ($conf['tofooter'] == 'footer') {
 				$pagerender->addJsFooterInlineCode($name, $block, $conf['compress'], $conf['forceOnTop']);
@@ -691,19 +693,13 @@ class tx_t3jquery
 			}
 		} else {
 			if ($conf['compress']) {
-				$block = t3lib_div::minifyJavaScript($block);
+				$block = GeneralUtility::minifyJavaScript($block);
 			}
 			if ($conf['tofooter'] == 'footer') {
-				$GLOBALS['TSFE']->additionalFooterData['t3jquery.jsdata.'.$name] = t3lib_div::wrapJS($block, TRUE);
+				$GLOBALS['TSFE']->additionalFooterData['t3jquery.jsdata.'.$name] = GeneralUtility::wrapJS($block, TRUE);
 			} else {
-				$GLOBALS['TSFE']->additionalHeaderData['t3jquery.jsdata.'.$name] = t3lib_div::wrapJS($block, TRUE);
+				$GLOBALS['TSFE']->additionalHeaderData['t3jquery.jsdata.'.$name] = GeneralUtility::wrapJS($block, TRUE);
 			}
 		}
 	}
 }
-
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/class.tx_t3jquery.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/class.tx_t3jquery.php']);
-}
-?>

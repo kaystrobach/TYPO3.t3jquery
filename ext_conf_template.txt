@@ -45,5 +45,5 @@ locationCDN = jquery
 
 
 
-# cat=dev/1000; type=user[EXT:t3jquery/lib/class.tx_t3jquery_tsparserext.php:tx_t3jquery_tsparserext->displayMessage]; label=Updater
+# cat=dev/1000; type=user[tx_t3jquery_tsparserext->displayMessage]; label=Updater
 updateMessage = 0
