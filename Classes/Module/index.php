@@ -79,7 +79,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$version = $this->jQueryVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryConfig = tx_t3jquery::getJqueryConfiguration($version);
+		$this->jQueryConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryConfiguration($version);
 		if (count($this->jQueryConfig['groups']) > 0) {
 			$this->configXML[$array_name] = $this->jQueryConfig['groups'];
 		}
@@ -91,7 +91,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$version = $this->jQueryUiVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryUiConfig = tx_t3jquery::getJqueryUiConfiguration($version);
+		$this->jQueryUiConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryUiConfiguration($version);
 		if (count($this->jQueryUiConfig['groups']) > 0) {
 			foreach ($this->jQueryUiConfig['groups'] as $group) {
 				$this->configXML[$array_name][] = $group;
@@ -105,7 +105,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$version = $this->jQueryTOOLSVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryTOOLSConfig = tx_t3jquery::getJqueryToolsConfiguration($version);
+		$this->jQueryTOOLSConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryToolsConfiguration($version);
 		if (count($this->jQueryTOOLSConfig['groups']) > 0) {
 			foreach ($this->jQueryTOOLSConfig['groups'] as $group) {
 				$this->configXML[$array_name][] = $group;
@@ -119,7 +119,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 			$version = $this->jQueryBootstrapVersionOrig;
 			$array_name = 'groups_missing';
 		}
-		$this->jQueryBootstrapConfig = tx_t3jquery::getJqueryBootstrapConfiguration($version);
+		$this->jQueryBootstrapConfig = \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqueryBootstrapConfiguration($version);
 		if (count($this->jQueryBootstrapConfig['groups']) > 0) {
 			foreach ($this->jQueryBootstrapConfig['groups'] as $group) {
 				$this->configXML[$array_name][] = $group;
@@ -128,7 +128,7 @@ class  tx_t3jquery_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass
 		// Define the language object
 		$this->LANG = $GLOBALS['LANG'];
 		// Define the used file directory
-		$this->configDir = PATH_site . tx_t3jquery::getJqPath();
+		$this->configDir = PATH_site . \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqPath();
 		if (! is_dir($this->configDir)) {
 			$this->configDir = PATH_site . 'uploads/tx_t3jquery/';
 		}
@@ -1048,7 +1048,7 @@ jQuery(document).ready(function() {
 	 */
 	function safeJqFile($block='')
 	{
-		\TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($this->configDir . tx_t3jquery::getJqName(), $block);
+		\TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($this->configDir . \T3Ext\T3jquery\Utility\T3jqueryUtility::getJqName(), $block);
 	}
 
 	/**
@@ -1310,21 +1310,8 @@ jQuery(document).ready(function() {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/mod1/index.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/t3jquery/mod1/index.php']);
-}
-
-
 // Make instance:
 $SOBE = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_t3jquery_module1');
 $SOBE->init();
-
-
-// Include files?
-foreach ($SOBE->include_once as $INC_FILE) {
-	include_once($INC_FILE);
-}
-
-
 $SOBE->main();
 $SOBE->printContent();
