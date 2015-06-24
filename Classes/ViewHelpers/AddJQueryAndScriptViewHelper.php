@@ -20,6 +20,7 @@
  *                                                                        */
 
 namespace T3Ext\T3jquery\ViewHelpers;
+use T3Ext\T3jquery\Utility\T3jqueryUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
@@ -29,7 +30,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  *
  * <code title="Simple">
  *   {namespace t3jquery=Tx_T3jquery_ViewHelpers}
- *   
+ *
  *   <t3jquery:AddJQueryAndScript jsfile="EXT:example/main.js"/>
  * </code>
  * <output>
@@ -96,7 +97,7 @@ class AddJQueryAndScriptViewHelper extends AbstractTagBasedViewHelper {
 			if($tofooter !== NULL) {
 				$config['tofooter'] = $tofooter;
 			}
-			tx_t3jquery::addJS('', $config);
+			T3jqueryUtility::addJS('', $config);
 		}
 		return '';
 	}

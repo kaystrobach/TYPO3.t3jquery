@@ -104,7 +104,7 @@ class T3jqueryUtility
 	function addJqJS()
 	{
 		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess']['t3jquery']
-			= '\\T3Ext\\T3jquery\\Utility\\T3jqueryUtility->addJqJsByHook';
+			= 'T3Ext\\T3jquery\\Utility\\T3jqueryUtility->addJqJsByHook';
 	}
 
 	/**
