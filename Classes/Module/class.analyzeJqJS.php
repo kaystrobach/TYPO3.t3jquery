@@ -1,29 +1,29 @@
 <?php
 /***************************************************************
-*  Copyright notice
-*
-*  Based on t3mootools from Peter Klein <peter@umloud.dk>
-*  (c) 2007-2009 Juergen Furrer (juergen.furrer@gmail.com)
-*  All rights reserved
-*
-*  This script is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*  A copy is found in the textfile GPL.txt and important notices to the license
-*  from the author is found in LICENSE.txt distributed with these scripts.
-*
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+ *  Copyright notice
+ *
+ *  Based on t3mootools from Peter Klein <peter@umloud.dk>
+ *  (c) 2007-2009 Juergen Furrer (juergen.furrer@gmail.com)
+ *  All rights reserved
+ *
+ *  This script is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the textfile GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 /**
  * Module 'jQuery Analyze' for the 't3jquery' extension.
@@ -32,22 +32,21 @@
  * @package    TYPO3
  * @subpackage tx_t3jquery
  */
-class analyzeJqJS
-{
+class analyzeJqJS {
 	private $version = '0.2';
 	private $dependencies = array();
 	private $configXML = array();
 
 	/**
 	 * Analyze a given JS script
-	 * @param $file
-	 * @param $string
-	 * @param $config
-	 * @return void
+	 * @param string $inputFile
+	 * @param bool $string
+	 * @param array $config
+	 * @internal
 	 */
-	public function __construct($inputFile='', $string=FALSE, $config=array()) {
+	public function __construct($inputFile = '', $string = FALSE, $config = array()) {
 		$this->configXML = $config;
-		if ($string || $string = t3lib_div::getURL($inputFile)) {
+		if ($string || $string = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($inputFile)) {
 			// we just look for double quote
 			$string = str_replace("'", '"', $string);
 			$result = array();
@@ -62,7 +61,7 @@ class analyzeJqJS
 						}
 					}
 				}
-				// search for 
+				// search for
 				foreach ($this->configXML as $group) {
 					if (count($group['files']) > 0) {
 						foreach ($group['files'] as $file) {
@@ -80,14 +79,16 @@ class analyzeJqJS
 
 	/**
 	 * Returns if the component needed
-	 * 
-	 * @return boolean
+	 *
+	 * @param $fileData
+	 * @param array $array
+	 * @return bool
 	 */
-	private function contains($fileData, $array=array()) {
+	private function contains($fileData, $array = array()) {
 		if (!is_array($array)) {
 			return FALSE;
 		}
-		foreach($array as $item) {
+		foreach ($array as $item) {
 			if (strpos($fileData, $item) !== FALSE) {
 				return TRUE;
 			}
@@ -97,7 +98,7 @@ class analyzeJqJS
 
 	/**
 	 * Returns all dependencies
-	 * 
+	 *
 	 * @return array
 	 */
 	public function getDependencies() {
