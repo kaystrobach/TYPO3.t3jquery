@@ -50,7 +50,7 @@ class TsParserExt
 	 * @var array
 	 */
 	private $supportedToolsVersion = array();
-	
+
 	/**
 	 * Configuratio array
 	 * @var array
@@ -59,7 +59,9 @@ class TsParserExt
 
 	/**
 	 * Shows the update Message
-	 * @return	string
+	 * @param $params
+	 * @param $tsObj
+	 * @return string
 	 */
 	public function displayMessage(&$params, &$tsObj)
 	{
@@ -149,7 +151,7 @@ class TsParserExt
 
 	/**
 	 * Check the config for a gifen feature
-	 * 
+	 *
 	 * @return boolean
 	 */
 	private function checkConfig()
