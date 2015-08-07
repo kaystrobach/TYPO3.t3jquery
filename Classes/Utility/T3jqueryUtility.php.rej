@@ -1,0 +1,16 @@
+diff a/Classes/Utility/T3jqueryUtility.php b/Classes/Utility/T3jqueryUtility.php	(rejected hunks)
+@@ -444,13 +444,7 @@
+ 				}
+ 			}
+ 		}
+-		if ( ( $confArr['dontIntegrateOnUID'] && is_object($GLOBALS['TSFE']) && in_array($GLOBALS['TSFE']->id, array_values(GeneralUtility::trimExplode(',', $confArr['dontIntegrateOnUID'], TRUE)))))
+-			return FALSE;
+-
+-		if ( ( $confArr['dontIntegrateOnType'] && is_object($GLOBALS['TSFE']) && in_array($GLOBALS['TSFE']->type, array_values(GeneralUtility::trimExplode(',', $confArr['dontIntegrateOnType'], TRUE)))))
+-			return FALSE;
+-
+-		return TRUE;
++		return (!$confArr['dontIntegrateOnUID'] || !is_object($GLOBALS['TSFE']) || !in_array($GLOBALS['TSFE']->id, array_values(GeneralUtility::trimExplode(',', $confArr['dontIntegrateOnUID'], TRUE))));
+ 	}
+ 
+ 	/**
