@@ -11,5 +11,6 @@ return array(
 	'tx_t3jquery_viewhelpers_addjqueryandscriptviewhelper' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
 	'tx_t3jquery_viewhelpers_addjqueryviewhelper' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
 	'analyzeJqJS' => $extensionPath . 'Classes/Module/class.analyzeJqJS.php',
+	'JavaScriptPacker' => $extensionPath . 'Classes/Module/class.JavaScriptPacker.php'
 );
 ?>
