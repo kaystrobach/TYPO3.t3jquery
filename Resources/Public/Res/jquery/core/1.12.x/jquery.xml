@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <t3jquery>
 	<version type="array">
-		<act>2.1.4</act>
-		<cdn>2.1.4</cdn>
+		<act>1.12.4</act>
+		<cdn>1.12.4</cdn>
 	</version>
 	<groups type="array">
 		<numIndex index="1" type="array">
@@ -70,13 +70,6 @@
 					<sources type="array">
 						<numIndex index="1">.cookie(</numIndex>
 					</sources>
-				</numIndex>
-				<numIndex index="5" type="array">
-					<name>Migrate</name>
-					<label>Migrate</label>
-					<detail>LLL:EXT:t3jquery/mod1/locallang.xml:jquery.component.migrate</detail>
-					<file>jquery.migrate.js</file>
-					<depends>jQuery</depends>
 				</numIndex>
 			</files>
 		</numIndex>
