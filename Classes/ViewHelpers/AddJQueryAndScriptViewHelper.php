@@ -20,6 +20,7 @@
  *                                                                        */
 
 namespace T3Ext\T3jquery\ViewHelpers;
+
 use T3Ext\T3jquery\Utility\T3jqueryUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
@@ -44,61 +45,63 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  * @license http://www.gnu.org/copyleft/gpl.html
  */
 
-class AddJQueryAndScriptViewHelper extends AbstractTagBasedViewHelper {
-	/**
-	 * @param string $jsfile
-	 * @param string $jsurl
-	 * @param string $jsdata
-	 * @param string $jsready
-	 * @param boolean $forceOnTop
-	 * @param string $compress
-	 * @param string $type
-	 * @param boolean $tofooter
-	 * @param boolean $renderChildrenToData
-	 * @return string
-	 */
+class AddJQueryAndScriptViewHelper extends AbstractTagBasedViewHelper
+{
+    /**
+     * @param string $jsfile
+     * @param string $jsurl
+     * @param string $jsdata
+     * @param string $jsready
+     * @param boolean $forceOnTop
+     * @param string $compress
+     * @param string $type
+     * @param boolean $tofooter
+     * @param boolean $renderChildrenToData
+     * @return string
+     */
 
-	public function render($jsfile = NULL, $jsurl = NULL, $jsdata = NULL, $jsready = NULL, $forceOnTop = NULL, $compress = NULL, $type = "text/javascript", $tofooter = null, $renderChildrenToData = false) {
-		$buffer_data = NULL;
-		$buffer_ready = NULL;
-		if ($renderChildrenToData === true ) {
-			$buffer_data = $this->renderChildren();
-		} else {
-			$buffer_ready = $this->renderChildren();
-		}
-			// checks if t3jquery is loaded
-		if (T3JQUERY === true) {
-			$config = array();
-			if($jsfile !== NULL) {
-				$config['jsfile'] = $jsfile;
-			}
-			if($jsurl !== NULL) {
-				$config['jsurl'] = $jsurl;
-			}
-			if($jsdata !== NULL) {
-				$config['jsdata'] = $buffer_data . "\n" . $jsdata;
-			} else {
-				$config['jsdata'] = $buffer_data;
-			}
-			if($jsready !== NULL) {
-				$config['jsready'] = $buffer_ready . "\n" . $jsready;
-			} else {
-				$config['jsready'] = $buffer_ready;
-			}
-			if($forceOnTop !== NULL) {
-				$config['forceOnTop'] = $forceOnTop;
-			}
-			if($compress !== NULL) {
-				$config['compress'] = $compress;
-			}
-			if($type !== NULL) {
-				$config['type'] = $type;
-			}
-			if($tofooter !== NULL) {
-				$config['tofooter'] = $tofooter;
-			}
-			T3jqueryUtility::addJS('', $config);
-		}
-		return '';
-	}
+    public function render($jsfile = null, $jsurl = null, $jsdata = null, $jsready = null, $forceOnTop = null, $compress = null, $type = "text/javascript", $tofooter = null, $renderChildrenToData = false)
+    {
+        $buffer_data = null;
+        $buffer_ready = null;
+        if ($renderChildrenToData === true) {
+            $buffer_data = $this->renderChildren();
+        } else {
+            $buffer_ready = $this->renderChildren();
+        }
+            // checks if t3jquery is loaded
+        if (T3JQUERY === true) {
+            $config = array();
+            if ($jsfile !== null) {
+                $config['jsfile'] = $jsfile;
+            }
+            if ($jsurl !== null) {
+                $config['jsurl'] = $jsurl;
+            }
+            if ($jsdata !== null) {
+                $config['jsdata'] = $buffer_data . "\n" . $jsdata;
+            } else {
+                $config['jsdata'] = $buffer_data;
+            }
+            if ($jsready !== null) {
+                $config['jsready'] = $buffer_ready . "\n" . $jsready;
+            } else {
+                $config['jsready'] = $buffer_ready;
+            }
+            if ($forceOnTop !== null) {
+                $config['forceOnTop'] = $forceOnTop;
+            }
+            if ($compress !== null) {
+                $config['compress'] = $compress;
+            }
+            if ($type !== null) {
+                $config['type'] = $type;
+            }
+            if ($tofooter !== null) {
+                $config['tofooter'] = $tofooter;
+            }
+            T3jqueryUtility::addJS('', $config);
+        }
+        return '';
+    }
 }

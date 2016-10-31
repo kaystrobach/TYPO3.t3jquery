@@ -5,12 +5,11 @@
 $extensionPath = t3lib_extMgm::extPath('t3jquery');
 $extensionClassesPath = $extensionPath . 'Classes/';
 return array(
-	'tx_t3jquery' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
-	'tx_t3jquery_module1' => $extensionClassesPath . 'Module/index.php',
-	'tx_t3jquery_tsparserext' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
-	'tx_t3jquery_viewhelpers_addjqueryandscriptviewhelper' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
-	'tx_t3jquery_viewhelpers_addjqueryviewhelper' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
-	'analyzeJqJS' => $extensionPath . 'Classes/Module/class.analyzeJqJS.php',
-	'JavaScriptPacker' => $extensionPath . 'Classes/Module/class.JavaScriptPacker.php'
+    'tx_t3jquery' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
+    'tx_t3jquery_module1' => $extensionClassesPath . 'Module/index.php',
+    'tx_t3jquery_tsparserext' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
+    'tx_t3jquery_viewhelpers_addjqueryandscriptviewhelper' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
+    'tx_t3jquery_viewhelpers_addjqueryviewhelper' => $extensionPath . 'Migrations/Code/LegacyClassesForIde.php',
+    'analyzeJqJS' => $extensionPath . 'Classes/Module/class.analyzeJqJS.php',
+    'JavaScriptPacker' => $extensionPath . 'Classes/Module/class.JavaScriptPacker.php'
 );
-?>
