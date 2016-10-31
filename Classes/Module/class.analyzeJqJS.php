@@ -32,76 +32,80 @@
  * @package    TYPO3
  * @subpackage tx_t3jquery
  */
-class analyzeJqJS {
-	private $version = '0.2';
-	private $dependencies = array();
-	private $configXML = array();
+class analyzeJqJS
+{
+    private $version = '0.2';
+    private $dependencies = array();
+    private $configXML = array();
 
-	/**
-	 * Analyze a given JS script
-	 * @param string $inputFile
-	 * @param bool $string
-	 * @param array $config
-	 * @internal
-	 */
-	public function __construct($inputFile = '', $string = FALSE, $config = array()) {
-		$this->configXML = $config;
-		if ($string || $string = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($inputFile)) {
-			// we just look for double quote
-			$string = str_replace("'", '"', $string);
-			$result = array();
-			$components = array();
-			if (count($this->configXML) > 0) {
-				// build the components array
-				foreach ($this->configXML as $group) {
-					if (count($group['files']) > 0) {
-						foreach ($group['files'] as $file) {
-							$components[$file['name']] = $file;
-							$components[$file['name']]['groupname'] = $group['name'];
-						}
-					}
-				}
-				// search for
-				foreach ($this->configXML as $group) {
-					if (count($group['files']) > 0) {
-						foreach ($group['files'] as $file) {
-							if ($this->contains($string, $file['sources']) === TRUE) {
-								$result = array_merge($result, array($components[$file['depends']]['name'] => $components[$file['depends']]['groupname']));
-								$result = array_merge($result, array($file['name'] => $components[$file['name']]['groupname']));
-							}
-						}
-					}
-				}
-			}
-			$this->dependencies = $result;
-		}
-	}
+    /**
+     * Analyze a given JS script
+     * @param string $inputFile
+     * @param bool $string
+     * @param array $config
+     * @internal
+     */
+    public function __construct($inputFile = '', $string = false, $config = array())
+    {
+        $this->configXML = $config;
+        if ($string || $string = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($inputFile)) {
+            // we just look for double quote
+            $string = str_replace("'", '"', $string);
+            $result = array();
+            $components = array();
+            if (count($this->configXML) > 0) {
+                // build the components array
+                foreach ($this->configXML as $group) {
+                    if (count($group['files']) > 0) {
+                        foreach ($group['files'] as $file) {
+                            $components[$file['name']] = $file;
+                            $components[$file['name']]['groupname'] = $group['name'];
+                        }
+                    }
+                }
+                // search for
+                foreach ($this->configXML as $group) {
+                    if (count($group['files']) > 0) {
+                        foreach ($group['files'] as $file) {
+                            if ($this->contains($string, $file['sources']) === true) {
+                                $result = array_merge($result, array($components[$file['depends']]['name'] => $components[$file['depends']]['groupname']));
+                                $result = array_merge($result, array($file['name'] => $components[$file['name']]['groupname']));
+                            }
+                        }
+                    }
+                }
+            }
+            $this->dependencies = $result;
+        }
+    }
 
-	/**
-	 * Returns if the component needed
-	 *
-	 * @param $fileData
-	 * @param array $array
-	 * @return bool
-	 */
-	private function contains($fileData, $array = array()) {
-		if (!is_array($array)) {
-			return FALSE;
-		}
-		foreach ($array as $item) {
-			if (strpos($fileData, $item) !== FALSE) {
-				return TRUE;
-			}
-		}
-		return FALSE;
-	}
+    /**
+     * Returns if the component needed
+     *
+     * @param $fileData
+     * @param array $array
+     * @return bool
+     */
+    private function contains($fileData, $array = array())
+    {
+        if (!is_array($array)) {
+            return false;
+        }
+        foreach ($array as $item) {
+            if (strpos($fileData, $item) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * Returns all dependencies
-	 *
-	 * @return array
-	 */
-	public function getDependencies() {
-		return $this->dependencies;
-	}
+    /**
+     * Returns all dependencies
+     *
+     * @return array
+     */
+    public function getDependencies()
+    {
+        return $this->dependencies;
+    }
 }

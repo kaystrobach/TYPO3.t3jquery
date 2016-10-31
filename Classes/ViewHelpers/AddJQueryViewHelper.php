@@ -20,6 +20,7 @@
  *                                                                        */
 
 namespace T3Ext\T3jquery\ViewHelpers;
+
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use T3Ext\T3jquery\Utility\T3jqueryUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
@@ -31,7 +32,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  *
  * <code title="Simple">
  *   {namespace t3jquery=Tx_T3jquery_ViewHelpers}
- *   
+ *
  *   <t3jquery:AddJQuery />
  * </code>
  * <output>
@@ -43,19 +44,21 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  * @license http://www.gnu.org/copyleft/gpl.html
  */
 
-class AddJQueryViewHelper extends AbstractTagBasedViewHelper {
-	/**
-	 * Adds T3Jquery as Lib
-	 * @return string
-	*/
-	public function render() {
-			// checks if t3jquery is loaded
-		if (ExtensionManagementUtility::isLoaded('t3jquery')) {
-		}
-			// if t3jquery is loaded and the custom Library had been created
-		if (T3JQUERY === true) {
-			T3jqueryUtility::addJqJS();
-		}
-		return '';
-	}
+class AddJQueryViewHelper extends AbstractTagBasedViewHelper
+{
+    /**
+     * Adds T3Jquery as Lib
+     * @return string
+    */
+    public function render()
+    {
+        // checks if t3jquery is loaded
+        if (ExtensionManagementUtility::isLoaded('t3jquery')) {
+        }
+            // if t3jquery is loaded and the custom Library had been created
+        if (T3JQUERY === true) {
+            T3jqueryUtility::addJqJS();
+        }
+        return '';
+    }
 }

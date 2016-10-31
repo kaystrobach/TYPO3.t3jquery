@@ -26,6 +26,7 @@
  ***************************************************************/
 
 namespace T3Ext\T3jquery\Parser\TypoScript;
+
 use T3Ext\T3jquery\Utility\T3jqueryUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,100 +40,100 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class TsParserExt
 {
-	/**
-	 * Supported jQuery UI-Versions
-	 * @var array
-	 */
-	private $supportedUiVersion = array();
+    /**
+     * Supported jQuery UI-Versions
+     * @var array
+     */
+    private $supportedUiVersion = array();
 
-	/**
-	 * Supported jQuery Tools-Versions
-	 * @var array
-	 */
-	private $supportedToolsVersion = array();
+    /**
+     * Supported jQuery Tools-Versions
+     * @var array
+     */
+    private $supportedToolsVersion = array();
 
-	/**
-	 * Configuratio array
-	 * @var array
-	 */
-	private $confArr = array();
+    /**
+     * Configuratio array
+     * @var array
+     */
+    private $confArr = array();
 
-	/**
-	 * Shows the update Message
-	 * @param $params
-	 * @param $tsObj
-	 * @return string
-	 */
-	public function displayMessage(&$params, &$tsObj)
-	{
-		$out = '';
-		if (T3jqueryUtility::getIntFromVersion(TYPO3_version) < 4003000) {
-			// 4.3.0 comes with flashmessages styles. For older versions we include the needed styles here
-			$cssPath = $GLOBALS['BACK_PATH'] . ExtensionManagementUtility::extRelPath('t3jquery');
-			$out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
-		}
-		// get all supported UI-Versions from folder
-		$supportedUiVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/ui/"));
-		if (is_array($supportedUiVersions)) {
-			foreach ($supportedUiVersions as $supportedUiVersion) {
-				if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/ui/").$supportedUiVersion.'/jquery.xml')) {
-					$this->supportedUiVersion[] = $supportedUiVersion;
-				}
-			}
-		}
+    /**
+     * Shows the update Message
+     * @param $params
+     * @param $tsObj
+     * @return string
+     */
+    public function displayMessage(&$params, &$tsObj)
+    {
+        $out = '';
+        if (T3jqueryUtility::getIntFromVersion(TYPO3_version) < 4003000) {
+            // 4.3.0 comes with flashmessages styles. For older versions we include the needed styles here
+            $cssPath = $GLOBALS['BACK_PATH'] . ExtensionManagementUtility::extRelPath('t3jquery');
+            $out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
+        }
+        // get all supported UI-Versions from folder
+        $supportedUiVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/ui/"));
+        if (is_array($supportedUiVersions)) {
+            foreach ($supportedUiVersions as $supportedUiVersion) {
+                if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/ui/").$supportedUiVersion.'/jquery.xml')) {
+                    $this->supportedUiVersion[] = $supportedUiVersion;
+                }
+            }
+        }
 
-		// get all supported TOOLS-Versions from folder
-		$supportedToolsVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/tools/"));
-		if (is_array($supportedToolsVersions)) {
-			foreach ($supportedToolsVersions as $supportedToolsVersion) {
-				if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/tools/").$supportedToolsVersion.'/jquery.xml')) {
-					$this->supportedToolsVersion[] = $supportedToolsVersion;
-				}
-			}
-		}
+        // get all supported TOOLS-Versions from folder
+        $supportedToolsVersions = GeneralUtility::get_dirs(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/tools/"));
+        if (is_array($supportedToolsVersions)) {
+            foreach ($supportedToolsVersions as $supportedToolsVersion) {
+                if (file_exists(GeneralUtility::getFileAbsFileName("EXT:t3jquery/Resources/Public/Res/jquery/tools/").$supportedToolsVersion.'/jquery.xml')) {
+                    $this->supportedToolsVersion[] = $supportedToolsVersion;
+                }
+            }
+        }
 
-		// get the conf array
-		$this->confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['t3jquery']);
-		// if form is submited, the POST values are taken
-		$post = GeneralUtility::_POST();
-		if (count($post) > 0) {
-			$jQueryUiVersion    = $post['data']['jQueryUiVersion'];
-			$jQueryToolsVersion = $post['data']['jQueryTOOLSVersion'];
-			$jQueryVersion      = $post['data']['jQueryVersion']."-".$post['data']['jQueryUiVersion'].($post['data']['jQueryTOOLSVersion'] ? "-".$post['data']['jQueryTOOLSVersion'] : "");
-			$configDir          = $post['data']['configDir'] . (preg_match("/\/$/", $configDir) ? "" : "/");
-		} else {
-			$jQueryUiVersion    = $this->confArr['jQueryUiVersion'];
-			$jQueryToolsVersion = $this->confArr['jQueryTOOLSVersion'];
-			$jQueryVersion      = T3JQUERYVERSION;
-			$configDir          = T3jqueryUtility::getJqPath();
-		}
-		if ($this->checkConfig() === FALSE) {
-			$out .= '
+        // get the conf array
+        $this->confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['t3jquery']);
+        // if form is submited, the POST values are taken
+        $post = GeneralUtility::_POST();
+        if (count($post) > 0) {
+            $jQueryUiVersion    = $post['data']['jQueryUiVersion'];
+            $jQueryToolsVersion = $post['data']['jQueryTOOLSVersion'];
+            $jQueryVersion      = $post['data']['jQueryVersion']."-".$post['data']['jQueryUiVersion'].($post['data']['jQueryTOOLSVersion'] ? "-".$post['data']['jQueryTOOLSVersion'] : "");
+            $configDir          = $post['data']['configDir'] . (preg_match("/\/$/", $configDir) ? "" : "/");
+        } else {
+            $jQueryUiVersion    = $this->confArr['jQueryUiVersion'];
+            $jQueryToolsVersion = $this->confArr['jQueryTOOLSVersion'];
+            $jQueryVersion      = T3JQUERYVERSION;
+            $configDir          = T3jqueryUtility::getJqPath();
+        }
+        if ($this->checkConfig() === false) {
+            $out .= '
 	<div class="typo3-message message-warning">
 		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.checkConfigHeader') . '</div>
 		<div class="message-body">
 			' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.checkConfig') . '
 		</div>
 	</div>';
-		} elseif ($this->confArr['integrateFromCDN'] || $post['data']['integrateFromCDN']) {
-			// Nothing to check
-		} else {
-			// check the actual version
-			if (
-				$jQueryUiVersion && ! in_array($jQueryUiVersion, $this->supportedUiVersion) ||
-				$jQueryToolsVersion && ! in_array($jQueryToolsVersion, $this->supportedToolsVersion)
-			) {
-				$out .= '
+        } elseif ($this->confArr['integrateFromCDN'] || $post['data']['integrateFromCDN']) {
+            // Nothing to check
+        } else {
+            // check the actual version
+            if (
+                $jQueryUiVersion && ! in_array($jQueryUiVersion, $this->supportedUiVersion) ||
+                $jQueryToolsVersion && ! in_array($jQueryToolsVersion, $this->supportedToolsVersion)
+            ) {
+                $out .= '
 	<div class="typo3-message message-information">
 		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.updatermsgHeader') . '</div>
 		<div class="message-body">
 			' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.updatermsg') . '
 		</div>
 	</div>';
-			}
-			// Check if the library exists
-			if (! file_exists(PATH_site . $configDir . T3jqueryUtility::getJqName())) {
-				$out .= '
+            }
+            // Check if the library exists
+            if (! file_exists(PATH_site . $configDir . T3jqueryUtility::getJqName())) {
+                $out .= '
 	<a href="javascript:void();" onclick="top.goToModule(\'tools_txt3jqueryM1\',\'\',\'createLib=1\');this.blur();return false;">
 		<div class="typo3-message message-warning">
 			<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:t3jquery/Resources/Private/Language/locallang.xml:extmng.updatermsgHeader2') . '</div>
@@ -141,40 +142,40 @@ class TsParserExt
 			</div>
 		</div>
 	</a>';
-			}
-		}
+            }
+        }
 
-		$out = '<div style="position:absolute;top:10px;right:10px; width:300px;">' . $out . '</div>';
-		return $out;
-	}
+        $out = '<div style="position:absolute;top:10px;right:10px; width:300px;">' . $out . '</div>';
+        return $out;
+    }
 
 
-	/**
-	 * Check the config for a gifen feature
-	 *
-	 * @return boolean
-	 */
-	private function checkConfig()
-	{
-		$confDefault = array(
-			'alwaysIntegrate',
-			'integrateToFooter',
-			'enableStyleStatic',
-			'dontIntegrateOnUID',
-			'dontIntegrateInRootline',
-			'jqLibFilename',
-			'integrateFromCDN',
-			'locationCDN',
-			'configDir',
-			'jQueryVersion',
-			'jQueryUiVersion',
-			'jQueryTOOLSVersion',
-		);
-		foreach ($confDefault as $val) {
-			if (! isset($this->confArr[$val]) && ! isset($_POST['data'][$val])) {
-				return FALSE;
-			}
-		}
-		return true;
-	}
+    /**
+     * Check the config for a gifen feature
+     *
+     * @return boolean
+     */
+    private function checkConfig()
+    {
+        $confDefault = array(
+            'alwaysIntegrate',
+            'integrateToFooter',
+            'enableStyleStatic',
+            'dontIntegrateOnUID',
+            'dontIntegrateInRootline',
+            'jqLibFilename',
+            'integrateFromCDN',
+            'locationCDN',
+            'configDir',
+            'jQueryVersion',
+            'jQueryUiVersion',
+            'jQueryTOOLSVersion',
+        );
+        foreach ($confDefault as $val) {
+            if (! isset($this->confArr[$val]) && ! isset($_POST['data'][$val])) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
