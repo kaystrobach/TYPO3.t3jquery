@@ -638,7 +638,7 @@ class T3jqueryUtility
     {
         if (T3jqueryUtility::getIntFromVersion(TYPO3_version) >= 4003000) {
             /** @var PageRenderer $pagerender */
-            $pagerender = $GLOBALS['TSFE']->getPageRenderer();
+            $pagerender = GeneralUtility::makeInstance(PageRenderer::class);
             if ($conf['tofooter'] == 'footer') {
                 $pagerender->addJsFooterFile($file, $conf['type'], $conf['compress'], $conf['forceOnTop'], $conf['allWrap']);
             } else {
@@ -668,7 +668,7 @@ class T3jqueryUtility
             $GLOBALS['TSFE']->inlineJS['t3jquery.jsdata.' . $name] = $block;
         } elseif (T3jqueryUtility::getIntFromVersion(TYPO3_version) >= 4003000) {
             /** @var PageRenderer $pagerender */
-            $pagerender = $GLOBALS['TSFE']->getPageRenderer();
+            $pagerender = GeneralUtility::makeInstance(PageRenderer::class);
             if ($conf['tofooter'] == 'footer') {
                 $pagerender->addJsFooterInlineCode($name, $block, $conf['compress'], $conf['forceOnTop']);
             } else {
