@@ -463,7 +463,6 @@ class T3jqueryUtility
         }
 
         return true;
-        
     }
 
     /**
