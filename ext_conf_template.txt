@@ -13,7 +13,7 @@ dontIntegrateOnUID =
 # cat=basic/40; type=string; label=Don't integrate to rootline: UID's where the library won't be integrated even if alwaysIntegrate is set (recursive from rootline)
 dontIntegrateInRootline =
 
-# cat=basic/31; type=string; label=Don't integrate: typeNums where the library won't be integrated even if alwaysIntegrate is set
+# cat=basic/31; type=string; label=Don't integrate on type: typeNums where the library won't be integrated even if alwaysIntegrate is set
 dontIntegrateOnType =
 
 # cat=basic/50; type=string; label=File prefix: Defines the prefix of the generated library (jquery-###VERSION###.js)
