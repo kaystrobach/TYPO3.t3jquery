@@ -462,7 +462,7 @@ class T3jqueryUtility
             return false;
         }
 
-		return true;
+        return true;
         
     }
 
