@@ -31,7 +31,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  * = Examples =
  *
  * <code title="Simple">
- *   {namespace t3jquery=Tx_T3jquery_ViewHelpers}
+ *   {namespace t3jquery=T3Ext\T3jquery\ViewHelpers}
  *
  *   <t3jquery:AddJQuery />
  * </code>
@@ -54,6 +54,7 @@ class AddJQueryViewHelper extends AbstractTagBasedViewHelper
     {
         // checks if t3jquery is loaded
         if (ExtensionManagementUtility::isLoaded('t3jquery')) {
+            require_once(ExtensionManagementUtility::extPath('t3jquery').'/Classes/Utility/T3jqueryUtility.php');
         }
             // if t3jquery is loaded and the custom Library had been created
         if (T3JQUERY === true) {
