@@ -163,7 +163,7 @@ class T3jqueryUtility
                 // in jQuery TOOLS jQuery is included
                 if ($confArr['jQueryTOOLSVersion'] != '') {
                     $params['jsLibs']['jQueryTOOLS'] = array(
-                        'file' => 'http://cdn.jquerytools.org/' . $confArr['jQueryTOOLSVersion'] . '/jquery.tools.min.js',
+                        'file' => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-tools/' . $confArr['jQueryTOOLSVersion'] . '/jquery.tools.min.js',
                         'type' => 'text/javascript',
                         'section' => self::getSection(),
                         'forceOnTop' => true,
