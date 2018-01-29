@@ -56,7 +56,7 @@ class AddJQueryViewHelper extends AbstractTagBasedViewHelper
         if (ExtensionManagementUtility::isLoaded('t3jquery')) {
             require_once(ExtensionManagementUtility::extPath('t3jquery').'/Classes/Utility/T3jqueryUtility.php');
         }
-            // if t3jquery is loaded and the custom Library had been created
+        // if t3jquery is loaded and the custom Library had been created
         if (T3JQUERY === true) {
             T3jqueryUtility::addJqJS();
         }

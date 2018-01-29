@@ -69,7 +69,7 @@ class AddJQueryAndScriptViewHelper extends AbstractTagBasedViewHelper
         } else {
             $buffer_ready = $this->renderChildren();
         }
-            // checks if t3jquery is loaded
+        // checks if t3jquery is loaded
         if (T3JQUERY === true) {
             $config = array();
             if ($jsfile !== null) {
