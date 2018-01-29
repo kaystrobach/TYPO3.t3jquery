@@ -502,14 +502,14 @@ class JavaScriptPacker
     }
     return $packed;
 }';
-/*
-'function($packed, $ascii, $count, $keywords, $encode, $decode) {
-    while ($count--)
-        if ($keywords[$count])
-            $packed = $packed.replace(new RegExp(\'\\\\b\' + $encode($count) + \'\\\\b\', \'g\'), $keywords[$count]);
-    return $packed;
-}';
-*/
+    /*
+    'function($packed, $ascii, $count, $keywords, $encode, $decode) {
+        while ($count--)
+            if ($keywords[$count])
+                $packed = $packed.replace(new RegExp(\'\\\\b\' + $encode($count) + \'\\\\b\', \'g\'), $keywords[$count]);
+        return $packed;
+    }';
+    */
     
     // code-snippet inserted into the unpacker to speed up decoding
     const JSFUNCTION_decodeBody =
@@ -530,30 +530,30 @@ class JavaScriptPacker
         $count = 1;
     }
 ';
-//};
-/*
-'	if (!\'\'.replace(/^/, String)) {
-        // decode all the values we need
-        while ($count--) $decode[$encode($count)] = $keywords[$count] || $encode($count);
-        // global replacement function
-        $keywords = [function ($encoded) {return $decode[$encoded]}];
-        // generic match
-        $encode = function () {return\'\\\\w+\'};
-        // reset the loop counter -  we are now doing a global replace
-        $count = 1;
-    }';
-*/
+    //};
+    /*
+    '	if (!\'\'.replace(/^/, String)) {
+            // decode all the values we need
+            while ($count--) $decode[$encode($count)] = $keywords[$count] || $encode($count);
+            // global replacement function
+            $keywords = [function ($encoded) {return $decode[$encoded]}];
+            // generic match
+            $encode = function () {return\'\\\\w+\'};
+            // reset the loop counter -  we are now doing a global replace
+            $count = 1;
+        }';
+    */
     
-     // zero encoding
-     // characters: 0123456789
-     const JSFUNCTION_encode10 =
+    // zero encoding
+    // characters: 0123456789
+    const JSFUNCTION_encode10 =
 'function($charCode) {
     return $charCode;
 }';//;';
     
-     // inherent base36 support
-     // characters: 0123456789abcdefghijklmnopqrstuvwxyz
-     const JSFUNCTION_encode36 =
+    // inherent base36 support
+    // characters: 0123456789abcdefghijklmnopqrstuvwxyz
+    const JSFUNCTION_encode36 =
 'function($charCode) {
     return $charCode.toString(36);
 }';//;';
