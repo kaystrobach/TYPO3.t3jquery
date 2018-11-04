@@ -453,7 +453,16 @@ class T3jqueryUtility
                 }
             }
         }
-        return (!$confArr['dontIntegrateOnUID'] || !is_object($GLOBALS['TSFE']) || !in_array($GLOBALS['TSFE']->id, array_values(GeneralUtility::trimExplode(',', $confArr['dontIntegrateOnUID'], true))));
+        
+        if (($confArr['dontIntegrateOnUID'] && is_object($GLOBALS['TSFE']) && in_array($GLOBALS['TSFE']->id, array_values(GeneralUtility::trimExplode(',', $confArr['dontIntegrateOnUID'], true))))) {
+            return false;
+        }
+
+        if (($confArr['dontIntegrateOnType'] && is_object($GLOBALS['TSFE']) && in_array($GLOBALS['TSFE']->type, array_values(GeneralUtility::trimExplode(',', $confArr['dontIntegrateOnType'], true))))) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
